@@ -246,7 +246,7 @@ function ee_cloud_backup() {
 	esac
     echo "echo \"Done!...Press 'Select' or choose 'Close' to continue!\"" >> /tmp/cloud.sh    
     chmod +x /tmp/cloud.sh
-    text_viewer -s /tmp/cloud.sh -t "EmuELEC cloud sync, please wait!..."
+    text_viewer -s /tmp/cloud.sh -t "Turborama cloud sync, please wait!..."
     rm /tmp/cloud.sh > /dev/null 2>&1
     
     if [ "${1}" == "restore" ]; then 

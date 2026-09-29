@@ -12,6 +12,10 @@ PKG_SECTION="emuelec/emulators"
 PKG_SHORTDESC="Symbian OS / N-Gage emulator for aarch64 Linux"
 PKG_TOOLCHAIN="cmake"
 
+post_unpack() {
+  git -C "${PKG_BUILD}" submodule update --init --recursive --force --no-recommend-shallow
+}
+
 PKG_CMAKE_OPTS_TARGET="
   -DCMAKE_BUILD_TYPE=Release
   -DEKA2L1_BUILD_TESTS=OFF

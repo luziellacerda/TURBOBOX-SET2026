@@ -14,6 +14,13 @@ PKG_LONGDESC="PPSSPP Standalone"
 GET_HANDLER_SUPPORT="git"
 PKG_BUILD_FLAGS="-lto"
 
+post_unpack() {
+  # The git source cache can retain submodule worktrees from a newer PPSSPP
+  # revision.  Restore every submodule to the commit recorded by PKG_VERSION.
+  git -C "${PKG_BUILD}" submodule sync --recursive
+  git -C "${PKG_BUILD}" submodule update --init --recursive --force --no-recommend-shallow
+}
+
 
 PKG_CMAKE_OPTS_TARGET+="-DUSE_SYSTEM_FFMPEG=ON \
                         -DUSING_FBDEV=ON \

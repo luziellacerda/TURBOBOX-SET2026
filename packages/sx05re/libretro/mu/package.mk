@@ -3,11 +3,12 @@
 
 PKG_NAME="mu"
 PKG_VERSION="de05588fcb1adca6738dc4cf6a2e6e6c447bf2f2"
+PKG_SHA256="093ecf5c979e92a9efd17031ca7262702ea51744fe252409f862deeee2a3b39f"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="CC BY-NC 3.0 US"
 PKG_SITE="https://github.com/libretro/Mu"
-PKG_URL="$PKG_SITE.git"
+PKG_URL="$PKG_SITE/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_PRIORITY="optional"
 PKG_SECTION="libretro"

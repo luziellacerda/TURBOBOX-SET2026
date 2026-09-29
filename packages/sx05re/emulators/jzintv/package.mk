@@ -11,7 +11,8 @@ PKG_LONGDESC="Joe Zbiciak Intellivision Emulator"
 PKG_TOOLCHAIN="make"
 
 pre_configure_target() {
-sed -i "s|sdl2-config|${SYSROOT_PREFIX}/usr/bin/sdl2-config|g" src/Makefile
+sed -i "s|^SDL2_CFLAGS :=.*|SDL2_CFLAGS := \$(shell ${SYSROOT_PREFIX}/usr/bin/sdl2-config --cflags) -DUSE_SDL2|" src/Makefile
+sed -i "s|^SDL2_LFLAGS :=.*|SDL2_LFLAGS := \$(shell ${SYSROOT_PREFIX}/usr/bin/sdl2-config --libs)|" src/Makefile
 PKG_MAKE_OPTS_TARGET="-C src/ -f Makefile GNU_READLINE=0 "
 }
 

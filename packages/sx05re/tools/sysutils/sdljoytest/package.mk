@@ -12,7 +12,7 @@ PKG_LONGDESC="Test joystick with SDL2 in Linux"
 PKG_TOOLCHAIN="make"
 
 pre_configure_target() {
-sed -i "s|gcc|${CC}|" Makefile
+sed -i -E "s|^([[:space:]]*)[^[:space:]]+ -g -o |\\1${CC} -g -o |" Makefile
 }
 
 makeinstall_target() {

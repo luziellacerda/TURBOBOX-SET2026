@@ -19,6 +19,7 @@ pre_make_target() {
   mkdir -p sys
   : > sys/io.h
   sed -i 's|-I/usr/include/SDL2||g' Makefile.libretro
+  sed -i 's|@clear|@:|' Makefile.libretro
 }
 
 make_target() {

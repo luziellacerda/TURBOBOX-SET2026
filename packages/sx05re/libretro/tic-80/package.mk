@@ -18,7 +18,14 @@ PKG_CMAKE_OPTS_TARGET="-DBUILD_LIBRETRO=ON \
                        -DCMAKE_BUILD_TYPE=Release \
                        -DBUILD_WITH_JANET=Off  \
                        -DBUILD_WITH_ALL=On \
-                       -DBUILD_STATIC=On"
+                       -DBUILD_STATIC=On \
+                       -DSDL_X11=OFF"
+
+post_unpack() {
+  # Several shallow submodules are now left at their upstream HEAD with an
+  # empty worktree. Restore every one to the commit recorded by TIC-80.
+  git -C "${PKG_BUILD}" submodule update --init --recursive --force --no-recommend-shallow
+}
 
 makeinstall_target() {
   mkdir -p ${INSTALL}/usr/lib/libretro

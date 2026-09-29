@@ -1,0 +1,20 @@
+--- a/build/libraries.py
++++ b/build/libraries.py
+@@ -430,9 +430,16 @@ class TCL(Library):
+ 					])
+ 				)
+ 			if text is not None:
+-				print('Result: %s' % text.strip(), file=log)
+-		return None if text is None else text.strip()
++				text = text.strip()
++				# tclConfig.sh records its target prefix as /usr. During a
++				# cross build those explicit paths must be rooted in the target
++				# sysroot instead of being interpreted as host directories.
++				if distroRoot is not None and not distroRoot.startswith('derived/'):
++					text = text.replace('-I/usr/', '-I%s/' % distroRoot)
++					text = text.replace('-L/usr/', '-L%s/' % distroRoot)
++				print('Result: %s' % text, file=log)
++		return text
+ 
+ 	@classmethod
+ 	def getCompileFlags(cls, platform, linkStatic, distroRoot):

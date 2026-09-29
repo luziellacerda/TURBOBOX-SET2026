@@ -1,0 +1,119 @@
+diff --git a/build/platform-linux.mk b/build/platform-linux.mk
+index 5d44db3..ce6d0fc 100644
+--- a/build/platform-linux.mk
++++ b/build/platform-linux.mk
+@@ -14,3 +14,6 @@ LIBRARYEXT:=.so
+ ifeq (,$(findstring uclibc,$(CXX)))
+ 	LINK_FLAGS+=-lrt
+ endif
++
++# EmuELEC uses the EGL/OpenGL ES stack instead of desktop OpenGL.
++LINK_FLAGS+=-lGLESv2
+diff --git a/src/video/GLUtil.hh b/src/video/GLUtil.hh
+index 9481798..cbfa211 100644
+--- a/src/video/GLUtil.hh
++++ b/src/video/GLUtil.hh
+@@ -1,14 +1,8 @@
+ #ifndef GLUTIL_HH
+ #define GLUTIL_HH
+ 
+-// Include GLEW headers.
+-#include <GL/glew.h>
+-// Include OpenGL headers.
+-#ifdef __APPLE__
+-#include <OpenGL/gl.h>
+-#else
+-#include <GL/gl.h>
+-#endif
++// EmuELEC exposes OpenGL ES 2 through EGL, not desktop OpenGL/GLEW.
++#include <GLES2/gl2.h>
+ 
+ #include "MemBuffer.hh"
+ 
+diff --git a/src/video/VisibleSurface.cc b/src/video/VisibleSurface.cc
+index cdcc914..890bd64 100644
+--- a/src/video/VisibleSurface.cc
++++ b/src/video/VisibleSurface.cc
+@@ -105,35 +105,6 @@ VisibleSurface::VisibleSurface(
+ 	ImGui_ImplSDL2_InitForOpenGL(window.get(), glContext);
+ 	ImGui_ImplOpenGL3_Init(glsl_version);
+ 
+-	// From the glew documentation:
+-	//   GLEW obtains information on the supported extensions from the
+-	//   graphics driver. Experimental or pre-release drivers, however,
+-	//   might not report every available extension through the standard
+-	//   mechanism, in which case GLEW will report it unsupported. To
+-	//   circumvent this situation, the glewExperimental global switch can
+-	//   be turned on by setting it to GL_TRUE before calling glewInit(),
+-	//   which ensures that all extensions with valid entry points will be
+-	//   exposed.
+-	// The 'glewinfo' utility also sets this flag before reporting results,
+-	// so I believe it would cause less confusion to do the same here.
+-	glewExperimental = GL_TRUE;
+-
+-	// Initialise GLEW library.
+-	// GLEW fails to initialise on Wayland because it has no GLX, since the
+-	// one provided by the distros was built to use GLX instead of EGL. We
+-	// ignore the GLEW_ERROR_NO_GLX_DISPLAY error with this temporary fix
+-	// until it is fixed by GLEW upstream and released by major distros.
+-	// See https://github.com/nigels-com/glew/issues/172
+-	if (GLenum glew_error = glewInit();
+-	    glew_error != GLEW_OK && glew_error != GLEW_ERROR_NO_GLX_DISPLAY) {
+-		throw InitException(
+-			"Failed to init GLEW: ",
+-			std::bit_cast<const char*>(glewGetErrorString(glew_error)));
+-	}
+-	if (!GLEW_VERSION_2_1) {
+-		throw InitException(
+-			"Need at least OpenGL version " VERSION_STRING);
+-	}
+ 	gl::context.emplace();
+ 
+ 	bool fullScreen = renderSettings.getFullScreen();
+diff --git a/src/video/PostProcessor.cc b/src/video/PostProcessor.cc
+index c7ee90a..4548f35 100644
+--- a/src/video/PostProcessor.cc
++++ b/src/video/PostProcessor.cc
+@@ -618,7 +618,11 @@ void PostProcessor::preCalcNoise(float factor)
+ 	}
+ 
+ 	// GL_LUMINANCE is no longer supported in newer openGL versions
+-	auto format = (OPENGL_VERSION >= OPENGL_3_3) ? GL_RED : GL_LUMINANCE;
++#if OPENGL_VERSION >= OPENGL_3_3
++	auto format = GL_RED;
++#else
++	auto format = GL_LUMINANCE;
++#endif
+ 	noiseTextureA.bind();
+ 	glTexImage2D(
+ 		GL_TEXTURE_2D,    // target
+diff --git a/src/video/scalers/GLHQScaler.cc b/src/video/scalers/GLHQScaler.cc
+index d3c6fa2..bd16110 100644
+--- a/src/video/scalers/GLHQScaler.cc
++++ b/src/video/scalers/GLHQScaler.cc
+@@ -31,7 +31,11 @@ GLHQScaler::GLHQScaler(GLScaler& fallback_, unsigned maxWidth_, unsigned maxHeig
+ 	}
+ 
+ 	// GL_LUMINANCE_ALPHA is no longer supported in newer openGL versions
+-	auto format = (OPENGL_VERSION >= OPENGL_3_3) ? GL_RG : GL_LUMINANCE_ALPHA;
++#if OPENGL_VERSION >= OPENGL_3_3
++	auto format = GL_RG;
++#else
++	auto format = GL_LUMINANCE_ALPHA;
++#endif
+ 	edgeTexture.bind();
+ 	glTexImage2D(GL_TEXTURE_2D,    // target
+ 	             0,                // level
+@@ -154,7 +158,11 @@ void GLHQScaler::uploadBlock(
+ 	}
+ 	edgeBuffer.unmap();
+ 
+-	auto format = (OPENGL_VERSION >= OPENGL_3_3) ? GL_RG : GL_LUMINANCE_ALPHA;
++#if OPENGL_VERSION >= OPENGL_3_3
++	auto format = GL_RG;
++#else
++	auto format = GL_LUMINANCE_ALPHA;
++#endif
+ 	edgeTexture.bind();
+ 	glTexSubImage2D(GL_TEXTURE_2D,            // target
+ 			0,                        // level

@@ -87,5 +87,5 @@ fi
 
 # a sync
 sync
-echo "Done. Please reboot EmuELEC so that the changes take effect!"
+echo "Done. Please reboot Turborama so that the changes take effect!"
 exit 0

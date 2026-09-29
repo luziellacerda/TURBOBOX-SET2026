@@ -26,7 +26,7 @@ __logdir="${scriptdir}/logs"
 __tmpdir="/tmp"
 __builddir="${__tmpdir}/build"
 __swapdir="${__tmpdir}"
-__backtitle="EmuELEC - Configuration"
+__backtitle="Turborama - Configuration"
 
 source "${scriptdir}/scriptmodules/system.sh"
 source "${scriptdir}/scriptmodules/helpers.sh"

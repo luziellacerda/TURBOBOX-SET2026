@@ -17,7 +17,7 @@ PKG_BUILD_FLAGS="lib32 -lto"
 PKG_TOOLCHAIN="cmake"
 
 PKG_CMAKE_OPTS_TARGET="-DLIBRETRO=ON \
-                        -DUSE_OPENMP=OFF \ 
+                        -DUSE_OPENMP=OFF \
                         -DCMAKE_BUILD_TYPE=Release \
                         -DUSE_GLES2=OFF \
                         -DUSE_GLES=ON \
@@ -27,6 +27,11 @@ unpack() {
   ${SCRIPTS}/get flycast
   mkdir -p ${PKG_BUILD}
   tar cf - -C ${SOURCES}/flycast/flycast-${PKG_VERSION} ${PKG_TAR_COPY_OPTS} . | tar xf - -C ${PKG_BUILD}
+}
+
+post_unpack() {
+  git -C "${PKG_BUILD}" submodule update --init --recursive --force --no-recommend-shallow \
+    core/deps/asio core/deps/libchdr
 }
 
 pre_make_target() {

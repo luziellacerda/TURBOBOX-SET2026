@@ -4,10 +4,20 @@ PKG_VERSION="f8f21296b1bf2e5112db5e2ee36a683b7610d1ff"
 PKG_SITE="https://github.com/worstcase-scenario/EE_touchHLE"
 PKG_GIT_CLONE_BRANCH="emuelec-integration"
 PKG_URL="${PKG_SITE}.git"
+PKG_GIT_SUBMODULES="yes"
 PKG_LICENSE="MPLv2"
 PKG_ARCH="aarch64"
 PKG_TOOLCHAIN="manual"
-PKG_DEPENDS_TARGET="toolchain rust cargo SDL2 openal-soft"
+PKG_DEPENDS_TARGET="toolchain cargo:host SDL2 openal-soft"
+
+post_unpack() {
+  # The source cache contains empty gitlink directories unless the submodules
+  # are explicitly restored.  Keep every dependency at the commit recorded by
+  # this touchHLE revision so rebuilds are reproducible.
+  git -C "${PKG_BUILD}" submodule sync --recursive
+  git -C "${PKG_BUILD}" submodule update --init --recursive --force --no-recommend-shallow
+}
+
 make_target() {
   unset CMAKE
   export PKG_CONFIG_ALLOW_CROSS=1

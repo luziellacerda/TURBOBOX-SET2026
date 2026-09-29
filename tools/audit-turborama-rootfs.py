@@ -3,11 +3,48 @@
 
 import argparse
 from collections import deque
+import gzip
 import os
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
+import struct
 import xml.etree.ElementTree as ET
+
+
+def audit_disk(path):
+    """Read the labels of the Generic MBR image without mounting or modifying it."""
+    errors = []
+    opener = gzip.open if path.suffix == '.gz' else open
+    with opener(path, 'rb') as stream:
+        mbr = stream.read(512)
+        if len(mbr) != 512 or mbr[510:512] != b'\x55\xaa':
+            return ['Invalid MBR signature']
+        if mbr[450] == 0xee:
+            return ['GPT is not supported by this Generic MBR label check']
+        boot_sector = struct.unpack_from('<I', mbr, 454)[0]
+        storage_sector = struct.unpack_from('<I', mbr, 470)[0]
+        if not 0 < boot_sector < storage_sector:
+            return ['Invalid boot/storage partition offsets']
+        stream.seek(boot_sector * 512)
+        boot = stream.read(512)
+        if len(boot) != 512:
+            return ['Truncated FAT boot sector']
+        if boot[82:90] == b'FAT32   ':
+            label = boot[71:82]
+        elif boot[54:62] in (b'FAT16   ', b'FAT12   '):
+            label = boot[43:54]
+        else:
+            return ['Unsupported boot filesystem']
+        if label.rstrip() != b'TURBORAMA':
+            errors.append('Boot partition is not labeled TURBORAMA')
+        stream.seek(storage_sector * 512 + 1024)
+        superblock = stream.read(1024)
+        if len(superblock) != 1024 or superblock[56:58] != b'\x53\xef':
+            errors.append('Missing ext filesystem on STORAGE partition')
+        elif superblock[120:136].rstrip(b'\0') != b'STORAGE':
+            errors.append('System data partition is not labeled STORAGE')
+    return errors
 
 
 def image_path(root, absolute):
@@ -110,10 +147,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('root', type=Path, help='Extracted Amlogic-ng SYSTEM directory')
     parser.add_argument('--initramfs', type=Path, help='Optional extracted initramfs directory')
+    parser.add_argument('--disk', type=Path, help='Optional Generic .img or .img.gz for partition label checks')
     args = parser.parse_args()
     if not args.root.is_dir():
         parser.error('root must be an extracted directory')
     errors = audit(args.root.resolve(), args.initramfs.resolve() if args.initramfs else None)
+    if args.disk:
+        errors.extend(audit_disk(args.disk))
     for error in errors:
         print('FAIL:', error)
     print(f'Rootfs structural audit: {len(errors)} failure(s). This does not replace a hardware boot test.')

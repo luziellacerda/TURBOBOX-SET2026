@@ -40,7 +40,7 @@ Para uma imagem `SYSTEM` extraída, a auditoria estrutural é somente de leitura
 python3 tools/audit-turborama-rootfs.py /caminho/para/system-extraido --initramfs /caminho/para/initramfs-extraido
 ```
 
-Essa auditoria confere identidade, serviços habilitados, carregadores ELF, configurações e integração do atualizador. O argumento `--initramfs` é opcional.
+Essa auditoria confere identidade, serviços habilitados, carregadores ELF, configurações e integração do atualizador. O argumento `--initramfs` é opcional. Use também `--disk /caminho/para/Generic.img.gz` para conferir os rótulos das partições de boot e dados, sem montar nem alterar a imagem.
 
 ## Licença e atribuições
 

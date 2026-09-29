@@ -10,7 +10,7 @@ index 6330da7..35e80e3 100644
 -if(SOLARUS_BASE_WRITE_DIR)
 -  add_definitions(-DSOLARUS_BASE_WRITE_DIR=\"${SOLARUS_BASE_WRITE_DIR}\")
 -endif()
-+set(SOLARUS_BASE_WRITE_DIR "/emuelec/configs/solarus/saves" CACHE STRING "Base directory where to write files, if blank it will be set depending on the OS (typically the user's home directory).")
++set(SOLARUS_BASE_WRITE_DIR "/turborama/configs/solarus/saves" CACHE STRING "Base directory where to write files, if blank it will be set depending on the OS (typically the user's home directory).")
 +add_definitions(-DSOLARUS_BASE_WRITE_DIR=\"${SOLARUS_BASE_WRITE_DIR}\")
  
  # Directory where to write savegames and other files saved by quests.

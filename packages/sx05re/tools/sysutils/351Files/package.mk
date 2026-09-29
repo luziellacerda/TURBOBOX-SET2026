@@ -2,11 +2,11 @@
 # Copyright (C) 2021-present Shanti Gilbert (https://github.com/shantigilbert)
 
 PKG_NAME="351Files"
-PKG_VERSION="492961726abb04ebefa58f7dda47b7040f3bd088"
-PKG_SHA256="249ef2842fb28fc9a1296f25a35b7f02ac5a5ef7a472b9a4e1a977722cf39643"
+PKG_VERSION="2fa3f9ff8e50fb9b897fbc667affabd4ece004e7"
+PKG_SHA256="2fa6c50521f01498651a6f1a74452de6c539ec3b126d56d25ef773d3483d95b6"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
-PKG_SITE="https://github.com/EmuELEC/351Files"
+PKG_SITE="https://github.com/luziellacerda/351Files"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain SDL2 SDL2_image SDL2_gfx SDL2_ttf freetype file"
 PKG_LONGDESC="File Manager"
@@ -19,24 +19,24 @@ pre_configure_target() {
   sed -i "s|sdl2-config|${SYSROOT_PREFIX}/usr/bin/sdl2-config|g" Makefile
   sed -i "s|g++|\$(CXX)|g" Makefile
 
-	EEDV="PC"
+	TURBORAMA_DEVICE_VARIANT="PC"
 
 if [ "${DEVICE}" == "OdroidGoAdvance" ] || [ "${DEVICE}" == "GameForce" ]; then
-	EEDV="EE_HH"
+	TURBORAMA_DEVICE_VARIANT="TURBORAMA_HH"
 fi
 
-  PKG_MAKE_OPTS_TARGET=" START_PATH="/storage" DEVICE=${EEDV} RES_PATH="/emuelec/configs/fm/res""
+  PKG_MAKE_OPTS_TARGET=" START_PATH="/storage" DEVICE=${TURBORAMA_DEVICE_VARIANT} RES_PATH="/turborama/configs/fm/res""
 }
 
 
 
 makeinstall_target() {
   mkdir -p ${INSTALL}/usr/bin
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/fm
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/fm
   cp 351Files ${INSTALL}/usr/bin/
-  cp -rf res ${INSTALL}/usr/config/emuelec/configs/fm/
+  cp -rf res ${INSTALL}/usr/config/turborama/configs/fm/
   
-  cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/emuelec/configs/
+  cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/turborama/configs/
   
   
 }

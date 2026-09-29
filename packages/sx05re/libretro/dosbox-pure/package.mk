@@ -15,11 +15,11 @@ PKG_BUILD_FLAGS="+lto"
 pre_configure_target() {
 
 if [ "${DEVICE}" == "Amlogic-old" ]; then
-	PKG_MAKE_OPTS_TARGET=" platform=emuelec"
+	PKG_MAKE_OPTS_TARGET=" platform=turborama"
 elif [ "${DEVICE}" == "Amlogic-ng" ] || [ "${DEVICE}" == "Amlogic-no" ] || ["${DEVICE}" == "Amlogic-ogu" ]; then
-	PKG_MAKE_OPTS_TARGET=" platform=emuelec-ng"
+	PKG_MAKE_OPTS_TARGET=" platform=turborama-ng"
 else
-	PKG_MAKE_OPTS_TARGET=" platform=emuelec-hh"
+	PKG_MAKE_OPTS_TARGET=" platform=turborama-hh"
 fi	
 }
 

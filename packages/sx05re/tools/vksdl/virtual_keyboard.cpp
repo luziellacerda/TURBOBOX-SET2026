@@ -495,7 +495,7 @@ bool load_font() {
         "/usr/share/fonts/liberation/LiberationSans-Bold.ttf",
         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
         "/usr/share/fonts/TTF/DejaVuSans-Bold.ttf",
-        "/storage/.config/emuelec/configs/Font.ttf",
+        "/storage/.config/turborama/configs/Font.ttf",
         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         "arial.ttf"
     };

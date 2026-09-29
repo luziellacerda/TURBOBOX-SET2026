@@ -10,7 +10,7 @@ PKG_SITE="https://github.com/libretro/arduous"
 PKG_URL="${PKG_SITE}.git"
 
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_SHORTDESC="Arduous libretro core (Arduboy)"
 PKG_LONGDESC="Arduous is a libretro emulator core for the Arduboy."
 PKG_TOOLCHAIN="cmake"

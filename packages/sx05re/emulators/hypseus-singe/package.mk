@@ -13,12 +13,12 @@ GET_HANDLER_SUPPORT="git"
 PKG_CMAKE_OPTS_TARGET="-DABSTRACT_SINGE=OFF ./src"
 
 pre_configure_target() {
-mkdir -p ${INSTALL}/usr/config/emuelec/configs/hypseus
-ln -fs /storage/roms/daphne/roms ${INSTALL}/usr/config/emuelec/configs/hypseus/roms
-ln -fs /usr/share/daphne/sound ${INSTALL}/usr/config/emuelec/configs/hypseus/sound
-ln -fs /usr/share/daphne/fonts ${INSTALL}/usr/config/emuelec/configs/hypseus/fonts
-ln -fs /usr/share/daphne/pics ${INSTALL}/usr/config/emuelec/configs/hypseus/pics
-ln -fs /usr/share/daphne/midi ${INSTALL}/usr/config/emuelec/configs/hypseus/midi
+mkdir -p ${INSTALL}/usr/config/turborama/configs/hypseus
+ln -fs /storage/roms/daphne/roms ${INSTALL}/usr/config/turborama/configs/hypseus/roms
+ln -fs /usr/share/daphne/sound ${INSTALL}/usr/config/turborama/configs/hypseus/sound
+ln -fs /usr/share/daphne/fonts ${INSTALL}/usr/config/turborama/configs/hypseus/fonts
+ln -fs /usr/share/daphne/pics ${INSTALL}/usr/config/turborama/configs/hypseus/pics
+ln -fs /usr/share/daphne/midi ${INSTALL}/usr/config/turborama/configs/hypseus/midi
 }
 
 post_makeinstall_target() {
@@ -27,7 +27,7 @@ cp -rf ${PKG_BUILD}/pics ${INSTALL}/usr/share/daphne/
 cp -rf ${PKG_BUILD}/sound ${INSTALL}/usr/share/daphne/
 cp -rf ${PKG_BUILD}/fonts ${INSTALL}/usr/share/daphne/
 cp -rf ${PKG_BUILD}/midi ${INSTALL}/usr/share/daphne/
-cp -rf ${PKG_BUILD}/doc/hypinput.ini ${INSTALL}/usr/config/emuelec/configs/hypseus/hypinput.ini
-cp -rf ${PKG_BUILD}/doc/hypinput_gamepad.ini ${INSTALL}/usr/config/emuelec/configs/hypseus/hypinput_gamepad.ini
-ln -fs /storage/.config/emuelec/configs/hypseus/hypinput.ini ${INSTALL}/usr/share/daphne/hypinput.ini
+cp -rf ${PKG_BUILD}/doc/hypinput.ini ${INSTALL}/usr/config/turborama/configs/hypseus/hypinput.ini
+cp -rf ${PKG_BUILD}/doc/hypinput_gamepad.ini ${INSTALL}/usr/config/turborama/configs/hypseus/hypinput_gamepad.ini
+ln -fs /storage/.config/turborama/configs/hypseus/hypinput.ini ${INSTALL}/usr/share/daphne/hypinput.ini
 }

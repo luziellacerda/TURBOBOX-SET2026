@@ -7,7 +7,7 @@
 . /etc/profile
 
 # Configure ADVMAME players based on ES settings
-CONFIG_DIR="/storage/.config/emuelec/configs/dolphin-emu"
+CONFIG_DIR="/storage/.config/turborama/configs/dolphin-emu"
 CONFIG=${CONFIG_DIR}/GCPadNew.ini
 WII_CONFIG=${CONFIG_DIR}/WiimoteNew.ini
 MAIN_CONFIG=${CONFIG_DIR}/Dolphin.ini
@@ -16,7 +16,7 @@ WII_CONFIG_TMP=/tmp/jc/WiimoteNew.tmp
 
 source joy_common.sh "dolphin"
 
-BTN_H0=$(get_ee_setting dolphin_btn_h0)
+BTN_H0=$(get_turborama_setting dolphin_btn_h0)
 [[ -z "${BTN_H0}" ]] && BTN_H0=6
 
 H0_AXIS1=$(( BTN_H0+0 ))
@@ -82,12 +82,12 @@ declare -A WII_DOLPHIN_BUTTONS=(
   [rightstick]="Buttons/ZR"
 )
 
-BTN_SWAP_XY=$(get_ee_setting dolphin_joy_swap_xy)
+BTN_SWAP_XY=$(get_turborama_setting dolphin_joy_swap_xy)
 if [[ "${BTN_SWAP_XY}" == "1" ]]; then
   GC_DOLPHIN_BUTTONS[x]="Buttons/X"
   GC_DOLPHIN_BUTTONS[y]="Buttons/Y"
 fi
-BTN_SWAP_AB=$(get_ee_setting dolphin_joy_swap_ab)
+BTN_SWAP_AB=$(get_turborama_setting dolphin_joy_swap_ab)
 if [[ "${BTN_SWAP_AB}" == "1" ]]; then
   GC_DOLPHIN_BUTTONS[a]="Buttons/A"
   GC_DOLPHIN_BUTTONS[b]="Buttons/B"
@@ -247,7 +247,7 @@ set_pad() {
 
   cat "${CONFIG_TMP}" | sort >> ${CONFIG}
 
-  RUMBLE=$(get_ee_setting ee_rumble_strength)
+  RUMBLE=$(get_turborama_setting turborama_rumble_strength)
   [[ -z "${RUMBLE}" ]] && RUMBLE=0
   echo "Rumble/Motor = `Strong`|`Weak`" >> ${CONFIG}
   echo "Rumble/Motor/Range = ${RUMBLE}" >> ${CONFIG}

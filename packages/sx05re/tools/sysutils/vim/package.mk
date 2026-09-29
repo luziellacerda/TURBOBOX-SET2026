@@ -21,12 +21,12 @@ PKG_CONFIGURE_OPTS_TARGET="vim_cv_getcwd_broken=no \
                            vim_cv_tty_mode=0620 \
                            ac_cv_sizeof_int=4 \
                            ac_cv_small_wchar_t=no \
-                           --datarootdir=/storage/.config/emuelec/configs/vimdata\
+                           --datarootdir=/storage/.config/turborama/configs/vimdata\
                            --disable-canberra \
                            --disable-nls \
                            --enable-selinux=no \
                            --enable-gui=no \
-                           --with-compiledby=EmuELEC \
+                           --with-compiledby=Turborama \
                            --with-features=huge \
                            --with-tlib=ncurses \
                            --without-x"
@@ -44,12 +44,12 @@ make_target() {
 
 pre_makeinstall_target() {
   mkdir -p ${INSTALL}/usr/bin
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/vimdata
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/vimdata
 }
 
 post_makeinstall_target() {
   (
-  mv ${INSTALL}/storage/.config/emuelec/configs/vimdata/vim/vimrc_example.vim ${INSTALL}/usr/config/emuelec/configs/vimdata/vimrc
+  mv ${INSTALL}/storage/.config/turborama/configs/vimdata/vim/vimrc_example.vim ${INSTALL}/usr/config/turborama/configs/vimdata/vimrc
   rm -r ${INSTALL}/storage/
   )
 }

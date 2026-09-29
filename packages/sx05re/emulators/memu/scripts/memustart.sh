@@ -9,8 +9,8 @@ ROMBASE="${ROMNAME%.*}"
 EXT="${ROMNAME##*.}"
 EXT="${EXT,,}"
 
-CONFIGDIR="/storage/.config/emuelec/configs/memu"
-SYSCONFIGDIR="/usr/config/emuelec/configs/memu"
+CONFIGDIR="/storage/.config/turborama/configs/memu"
+SYSCONFIGDIR="/usr/config/turborama/configs/memu"
 
 mkdir -p "${CONFIGDIR}/gptk"
 mkdir -p "${CONFIGDIR}/autotype"
@@ -41,8 +41,8 @@ case "${EXT}" in
     MEMU_EXTRA="-cpm -iobyte 0x80"
     ;;
   mtx)
-    # Game-specific autotype: /storage/.config/emuelec/configs/memu/autotype/<ROMBASE>.autotype
-    # Default: /storage/.config/emuelec/configs/memu/autotype/default.autotype
+    # Game-specific autotype: /storage/.config/turborama/configs/memu/autotype/<ROMBASE>.autotype
+    # Default: /storage/.config/turborama/configs/memu/autotype/default.autotype
     AUTOTYPE="${CONFIGDIR}/autotype/default.autotype"
     [ -f "${CONFIGDIR}/autotype/${ROMBASE}.autotype" ] && \
         AUTOTYPE="${CONFIGDIR}/autotype/${ROMBASE}.autotype"

@@ -11,7 +11,7 @@
 # Source predefined functions and variables
 . /etc/profile
 
-CONFIGDIR="/emuelec/configs/mupen64plussa"
+CONFIGDIR="/turborama/configs/mupen64plussa"
 SAVEDIR="/storage/roms/savestates/mupen64plussa"
 BIOSDIR="/storage/roms/bios/Mupen64plus"
 
@@ -37,7 +37,7 @@ extract_archive() {
 }
 
 setup_gamepad() {
-    AUTOGP=$(get_ee_setting mupen64plus_auto_gamepad)
+    AUTOGP=$(get_turborama_setting mupen64plus_auto_gamepad)
     [[ "$AUTOGP" != "0" ]] && set_mupen64_joy.sh
 }
 

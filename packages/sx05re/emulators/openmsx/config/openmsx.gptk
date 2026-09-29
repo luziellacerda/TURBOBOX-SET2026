@@ -3,7 +3,7 @@
 #
 # For game-specific key mappings (e.g. F1 for pause, F2 for menu), save a
 # modified copy of this file under the game's name, for example:
-#   /storage/.config/emuelec/configs/openmsx/gptk/1942 (1987)(Compile).gptk
+#   /storage/.config/turborama/configs/openmsx/gptk/1942 (1987)(Compile).gptk
 #
 # If no game-specific file is found, openmsx.gptk from the same folder is used.
 #

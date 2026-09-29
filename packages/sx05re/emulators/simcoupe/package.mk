@@ -7,7 +7,7 @@ PKG_SITE="https://github.com/simonowen/simcoupe"
 PKG_URL="$PKG_SITE/archive/refs/heads/master.tar.gz"
 PKG_DEPENDS_TARGET="toolchain SDL2 zlib libpng"
 PKG_PRIORITY="optional"
-PKG_SECTION="emuelec/emulators"
+PKG_SECTION="turborama/emulators"
 PKG_SHORTDESC="SimCoupe - SAM Coupe emulator"
 PKG_LONGDESC="SimCoupe is a SAM Coupe emulator for various platforms"
 PKG_TOOLCHAIN="cmake"
@@ -37,9 +37,9 @@ makeinstall_target() {
 
   # GPTK file
   if [ -f "${PKG_DIR}/config/simcoupe.gptk" ]; then
-    mkdir -p ${INSTALL}/usr/config/emuelec/configs/gptokeyb
+    mkdir -p ${INSTALL}/usr/config/turborama/configs/gptokeyb
     cp -f "${PKG_DIR}/config/simcoupe.gptk" \
-      "${INSTALL}/usr/config/emuelec/configs/gptokeyb/simcoupe.gptk"
+      "${INSTALL}/usr/config/turborama/configs/gptokeyb/simcoupe.gptk"
   fi
 
 }

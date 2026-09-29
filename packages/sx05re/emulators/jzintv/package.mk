@@ -21,6 +21,6 @@ makeinstall_target() {
   cp bin/jzintv ${INSTALL}/usr/bin
   cp ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin
   
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs
-  cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/emuelec/configs
+  mkdir -p ${INSTALL}/usr/config/turborama/configs
+  cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/turborama/configs
 }

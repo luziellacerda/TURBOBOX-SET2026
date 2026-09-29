@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0
-# EmuELEC / LibreELEC style package for libretro FreeChaF core
+# Turborama / LibreELEC style package for libretro FreeChaF core
 
 PKG_NAME="freechaf"
 PKG_VERSION="76c7a84f1f7e80f3e6f2bba96fe100cb24e99124"
@@ -10,7 +10,7 @@ PKG_SITE="https://github.com/libretro/FreeChaF"
 PKG_URL="${PKG_SITE}.git"
 
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_SHORTDESC="FreeChaF libretro core (Fairchild Channel F)"
 PKG_LONGDESC="FreeChaF is a libretro emulation core for the Fairchild Channel F / Video Entertainment System."
 

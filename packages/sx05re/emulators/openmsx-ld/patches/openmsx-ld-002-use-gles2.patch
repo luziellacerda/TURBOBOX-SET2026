@@ -7,7 +7,7 @@ index 5d44db3..ce6d0fc 100644
  	LINK_FLAGS+=-lrt
  endif
 +
-+# EmuELEC uses the EGL/OpenGL ES stack instead of desktop OpenGL.
++# Turborama uses the EGL/OpenGL ES stack instead of desktop OpenGL.
 +LINK_FLAGS+=-lGLESv2
 diff --git a/src/video/GLUtil.hh b/src/video/GLUtil.hh
 index 9481798..cbfa211 100644
@@ -25,7 +25,7 @@ index 9481798..cbfa211 100644
 -#else
 -#include <GL/gl.h>
 -#endif
-+// EmuELEC exposes OpenGL ES 2 through EGL, not desktop OpenGL/GLEW.
++// Turborama exposes OpenGL ES 2 through EGL, not desktop OpenGL/GLEW.
 +#include <GLES2/gl2.h>
  
  #include "MemBuffer.hh"

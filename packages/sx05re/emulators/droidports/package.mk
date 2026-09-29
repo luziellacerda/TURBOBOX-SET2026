@@ -18,6 +18,6 @@ makeinstall_target() {
 	mkdir -p ${INSTALL}/usr/bin
 	cp ${PKG_BUILD}/.${TARGET_NAME}/gmloader ${INSTALL}/usr/bin
 	cp ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin
-	mkdir -p ${INSTALL}/usr/config/emuelec/configs/gmloader
-	cp ${PKG_DIR}/config/* ${INSTALL}/usr/config/emuelec/configs/gmloader
+	mkdir -p ${INSTALL}/usr/config/turborama/configs/gmloader
+	cp ${PKG_DIR}/config/* ${INSTALL}/usr/config/turborama/configs/gmloader
 }

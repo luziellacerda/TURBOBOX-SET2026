@@ -2,10 +2,10 @@
 # Copyright (C) 2020-present Shanti Gilbert (https://github.com/shantigilbert)
 
 PKG_NAME="sdljoytest"
-PKG_VERSION="49724c185e19d176cb05f08eab5f2349c4c365b7"
-PKG_SHA256="e6c321cfb33b040dc56aa1472df6f50f5c956446e765e0238b073da4e6774ab1"
+PKG_VERSION="2de7e7fa14e11059eda7061caa95f2130e3ae68d"
+PKG_SHA256="9d556868ba7e8f5d0625178f91dc855a7033305abda627a012d7ce3711cca30a"
 PKG_LICENSE="OSS"
-PKG_SITE="https://github.com/EmuELEC/sdljoytest"
+PKG_SITE="https://github.com/luziellacerda/sdljoytest"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain SDL2"
 PKG_LONGDESC="Test joystick with SDL2 in Linux"

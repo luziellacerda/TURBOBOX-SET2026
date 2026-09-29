@@ -38,20 +38,20 @@ makeinstall_target() {
   cp ${PKG_DIR}/scripts/memustart.sh ${INSTALL}/usr/bin/memustart.sh
   chmod +x ${INSTALL}/usr/bin/memustart.sh
 
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/memu/gptk
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/memu/autotype
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/memu/gptk
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/memu/autotype
   cp ${PKG_DIR}/config/memu.gptk \
-    ${INSTALL}/usr/config/emuelec/configs/memu/gptk/memu.gptk
+    ${INSTALL}/usr/config/turborama/configs/memu/gptk/memu.gptk
   cp ${PKG_DIR}/config/default.autotype \
-    ${INSTALL}/usr/config/emuelec/configs/memu/autotype/default.autotype
+    ${INSTALL}/usr/config/turborama/configs/memu/autotype/default.autotype
 
   # MEMU runtime files
   cp -a ${PKG_BUILD}/run_time/memu.cfg \
         ${PKG_BUILD}/run_time/memu0.cfg \
         ${PKG_BUILD}/run_time/alt_keypad.kbd \
-    ${INSTALL}/usr/config/emuelec/configs/memu/
+    ${INSTALL}/usr/config/turborama/configs/memu/
   cp -a ${PKG_BUILD}/run_time/roms \
         ${PKG_BUILD}/run_time/disks \
         ${PKG_BUILD}/run_time/tapes \
-    ${INSTALL}/usr/config/emuelec/configs/memu/
+    ${INSTALL}/usr/config/turborama/configs/memu/
 }

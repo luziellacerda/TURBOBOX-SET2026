@@ -7,8 +7,8 @@
 
 ROMSPPSSPPFOLDER=/storage/roms/savestates/PPSSPPSDL/PSP
 PPSSPPFOLDER=/storage/.config/ppsspp/PSP/
-AUTOGP=$(get_ee_setting ppssppsdl_auto_gamepad)
-CHEEVOS=$(get_ee_setting global.retroachievements)
+AUTOGP=$(get_turborama_setting ppssppsdl_auto_gamepad)
+CHEEVOS=$(get_turborama_setting global.retroachievements)
 
 
 if [[ "${AUTOGP}" == "1" ]]; then

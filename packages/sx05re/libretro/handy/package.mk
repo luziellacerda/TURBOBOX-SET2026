@@ -36,7 +36,7 @@ PKG_TOOLCHAIN="make"
 PKG_AUTORECONF="no"
 
 if [ ${ARCH} = "aarch64" ]; then
-  PKG_MAKE_OPTS_TARGET=" platform=emuelec"
+  PKG_MAKE_OPTS_TARGET=" platform=turborama"
 else
   PKG_MAKE_OPTS_TARGET=" platform=classic_armv8_a35"
 fi

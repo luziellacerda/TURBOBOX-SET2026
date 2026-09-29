@@ -10,17 +10,17 @@
 
 if [ "${1}" == "toggleaudio" ];then
 # Toggle audio output
-CURRENTAUDIO=$(get_ee_setting "audio.device")
+CURRENTAUDIO=$(get_turborama_setting "audio.device")
 	case "${CURRENTAUDIO}" in
 	    "headphone")
 	    echo "setting speakers"
 		amixer cset name='Playback Path' SPK
-		set_ee_setting "audio.device" "speakers"
+		set_turborama_setting "audio.device" "speakers"
 		;;
 	    "auto"|"speakers"|*)
 	    echo "setting headphones"
 		amixer cset name='Playback Path' HP
-		set_ee_setting "audio.device" "headphone"
+		set_turborama_setting "audio.device" "headphone"
 		;;
 	esac
 fi
@@ -31,19 +31,19 @@ if [ "${1}" == "setaudio" ];then
 	    "headphone")
 	    echo "setting headphones"
 		amixer cset name='Playback Path' HP
-		set_ee_setting "audio.device" "headphone"
+		set_turborama_setting "audio.device" "headphone"
 		;;
 	  	"auto"|"speakers"|*)
 	  	echo "setting speakers"
 		amixer cset name='Playback Path' SPK
-		set_ee_setting "audio.device" "speakers"
+		set_turborama_setting "audio.device" "speakers"
 		;;
 	esac
 fi
 
 if [ "${1}" == "vol" ];then
 VOLSTEP=5
-CURRENTVOL=$(get_ee_setting "audio.volume")
+CURRENTVOL=$(get_turborama_setting "audio.volume")
 MAXVOL=100
 MINVOL=0
 	if [ "${2}" == "+" ]; then
@@ -56,7 +56,7 @@ MINVOL=0
 	[ "$STEPVOL" -ge "$MAXVOL" ] && STEPVOL="$MAXVOL"
 	[ "$STEPVOL" -le "$MINVOL" ] && STEPVOL="$MINVOL"
 	amixer set 'Playback' ${STEPVOL}%
-	set_ee_setting "audio.volume" ${STEPVOL}
+	set_turborama_setting "audio.volume" ${STEPVOL}
   fi    
 
 
@@ -82,7 +82,7 @@ MINBRIGHT="5"
 
     NEWVAL=$(awk -v a="$STEPBRIGHT" -v b="$MAXSYSBRIGHT" 'BEGIN{print int((a*b/100)+0.5)}')
 echo "${NEWVAL}" > /sys/class/backlight/backlight/brightness
-set_ee_setting "brightness.level" $STEPBRIGHT
+set_turborama_setting "brightness.level" $STEPBRIGHT
 fi
 
 if [ "${1}" == "oga_oc" ]; then

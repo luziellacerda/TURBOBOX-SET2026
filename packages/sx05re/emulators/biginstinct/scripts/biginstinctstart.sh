@@ -5,7 +5,7 @@ if [ ! -f /tmp/libOpenGL.so.0 ]; then
 fi
 
 # Add /tmp first so libOpenGL.so.0 symlink is found before other paths
-export LD_LIBRARY_PATH=/tmp:/usr/lib:/emuelec/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/tmp:/usr/lib:/turborama/lib:$LD_LIBRARY_PATH
 # Fix GL rendering issues on Mali GPU
 export LIBGL_NOTEST=1
 # Change to biginstinct directory

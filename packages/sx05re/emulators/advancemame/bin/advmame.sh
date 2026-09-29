@@ -5,7 +5,7 @@
 
 . /etc/profile
 
-CONFIG_DIR="/emuelec/configs/advmame"
+CONFIG_DIR="/turborama/configs/advmame"
 export DISPLAY=:0
 
 if [ -L "${CONFIG_DIR}" ]; then
@@ -14,7 +14,7 @@ fi
 
 if [ ! -d "${CONFIG_DIR}" ]; then
  mkdir -p "${CONFIG_DIR}"
- cp -rf /usr/config/emuelec/configs/advmame/* "${CONFIG_DIR}/"
+ cp -rf /usr/config/turborama/configs/advmame/* "${CONFIG_DIR}/"
 fi
 
 if [ ! -L "/storage/.advance" ]; then
@@ -29,7 +29,7 @@ sed -i "s|/roms/mame|/roms/arcade|g" ${CONFIG_DIR}/advmame.rc
 sed -i "s|/roms/arcade|/roms/mame|g" ${CONFIG_DIR}/advmame.rc
 fi
 
-if [ "${EE_DEVICE}" != "OdroidGoAdvance" ] && [ "${EE_DEVICE}" != "GameForce" ]; then
+if [ "${TURBORAMA_DEVICE}" != "OdroidGoAdvance" ] && [ "${TURBORAMA_DEVICE}" != "GameForce" ]; then
     unset DISPLAY
     MODE=`get_resolution`;
     sed -i '/device_video_modeline/d' ${CONFIG_DIR}/advmame.rc
@@ -63,7 +63,7 @@ fi
 
 PLATFORM=${1}
 ROMNAME="$(basename ${2})"
-AUTOGP=$(get_ee_setting advmame_auto_gamepad)
+AUTOGP=$(get_turborama_setting advmame_auto_gamepad)
 
 # Hack - Set the crash stack size to 0 to prevent program doing a large dump of poo.
 CRASH_STACK_SIZE=$( ulimit -c )
@@ -73,10 +73,10 @@ CRASH_STACK_SIZE=$( ulimit -c )
 # Hack - Revert crash stack size so it can poo nicely.
 ulimit -c ${CRASH_STACK_SIZE}
 
-emuelec-utils blank_buffer
+turborama-utils blank_buffer
 
 ARG=$(echo basename ${2} | sed 's/\.[^.]*$//')
 ARG="$(echo ${2} | sed 's=.*/==;s/\.[^.]*$//')"
 SDL_AUDIODRIVER=alsa advmame ${ARG} -quiet
 
-emuelec-utils blank_buffer
+turborama-utils blank_buffer

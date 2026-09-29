@@ -32,8 +32,8 @@ if [ "${DEVICE}" == "Amlogic-old" ]; then
 else
 	cp fbpad ${INSTALL}/usr/bin/fbpad
 fi
-	mkdir -p ${INSTALL}/usr/config/emuelec/configs
-	cp courr.tf ${INSTALL}/usr/config/emuelec/configs
+	mkdir -p ${INSTALL}/usr/config/turborama/configs
+	cp courr.tf ${INSTALL}/usr/config/turborama/configs
 	mkdir -p ${INSTALL}/usr/share/terminfo
 	tic -x ${PKG_BUILD}/fbpad-256 -o ${INSTALL}/usr/share/terminfo
 	}

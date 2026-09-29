@@ -35,7 +35,7 @@ makeinstall_target() {
 
   chmod +x ${INSTALL}/usr/bin/flycastdojo.sh
 
-	mkdir -p "${INSTALL}/usr/config/emuelec/configs"
-	ln -sf "/storage/.config/flycast-dojo" "${INSTALL}/usr/config/emuelec/configs/flycast-dojo"
+	mkdir -p "${INSTALL}/usr/config/turborama/configs"
+	ln -sf "/storage/.config/flycast-dojo" "${INSTALL}/usr/config/turborama/configs/flycast-dojo"
 
 }

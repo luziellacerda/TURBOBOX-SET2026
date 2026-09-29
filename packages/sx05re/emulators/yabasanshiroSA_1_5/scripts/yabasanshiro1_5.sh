@@ -23,10 +23,10 @@ fi
 
 # if the auto config was not succesful copy the default just in case.
 if [ ! -e "/storage/roms/saturn/yabasanshiro1_5/input.cfg" ]; then
-    cp -rf "/emuelec/configs/yabasanshiro1_5/input.cfg" "/storage/roms/saturn/yabasanshiro/input.cfg"
+    cp -rf "/turborama/configs/yabasanshiro1_5/input.cfg" "/storage/roms/saturn/yabasanshiro/input.cfg"
 fi
 
-HLEBIOS=$(get_ee_setting hlebios saturn "${ROMNAME}")
+HLEBIOS=$(get_turborama_setting hlebios saturn "${ROMNAME}")
 
 if [ "${HLEBIOS}" != 1 ]; then 
     if [ -e "/storage/roms/bios/saturn_bios.bin" ]; then
@@ -37,11 +37,11 @@ if [ "${HLEBIOS}" != 1 ]; then
     fi
 fi
 
-AUTOGP=$(get_ee_setting yabasanshiro_auto_gamepad)
+AUTOGP=$(get_turborama_setting yabasanshiro_auto_gamepad)
 if [[ "${AUTOGP}" == "1" ]]; then
   cp -f /storage/.emulationstation/es_input.cfg /storage/roms/saturn/yabasanshiro1_5/input.cfg
   set_yabasanshiro_joy1_5.sh
 fi
 
 # We use { } to avoid SIGUSR signal showing text and messing up with the error handling
-{ yabasanshiro1_5 -r 2 -i "${1}" ${BIOS}; } > /emuelec/logs/emuelec.log 2>&1
+{ yabasanshiro1_5 -r 2 -i "${1}" ${BIOS}; } > /turborama/logs/turborama.log 2>&1

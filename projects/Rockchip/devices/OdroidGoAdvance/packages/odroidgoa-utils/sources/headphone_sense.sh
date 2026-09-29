@@ -8,12 +8,12 @@
 
 # Switch to headphones if we have them already connected at boot
 GPIO=$(cat /sys/class/gpio/gpio86/value)
-[[ "$GPIO" == "1" ]] && set_ee_setting "audio.device" "headphone" || set_ee_setting "audio.device" "speakers"
+[[ "$GPIO" == "1" ]] && set_turborama_setting "audio.device" "headphone" || set_turborama_setting "audio.device" "speakers"
 
-if [ -e "/emuelec/configs/emuelec.conf" ]; then
-/usr/bin/odroidgoa_utils.sh setaudio $(get_ee_setting "audio.device")
-/usr/bin/odroidgoa_utils.sh vol $(get_ee_setting "audio.volume")
-/usr/bin/odroidgoa_utils.sh bright $(get_ee_setting "brightness.level")
+if [ -e "/turborama/configs/turborama.conf" ]; then
+/usr/bin/odroidgoa_utils.sh setaudio $(get_turborama_setting "audio.device")
+/usr/bin/odroidgoa_utils.sh vol $(get_turborama_setting "audio.volume")
+/usr/bin/odroidgoa_utils.sh bright $(get_turborama_setting "brightness.level")
 fi
 
 # Headphone sensing 
@@ -26,11 +26,11 @@ evtest "${DEVICE}" | while read line; do
     case $line in
 	(${HP_ON})
 	amixer cset name='Playback Path' HP
-	set_ee_setting "audio.device" "headphone"
+	set_turborama_setting "audio.device" "headphone"
 	;;
 	(${HP_OFF})
 	amixer cset name='Playback Path' SPK
-	set_ee_setting "audio.device" "speakers"
+	set_turborama_setting "audio.device" "speakers"
 	;;
     esac
 done

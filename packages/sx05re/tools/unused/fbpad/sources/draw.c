@@ -97,7 +97,7 @@ int fb_init(char *dev)
 	fcntl(fd, F_SETFD, fcntl(fd, F_GETFD) | FD_CLOEXEC);
 	bpp = (vinfo.bits_per_pixel + 7) >> 3;
 	fb = mmap(NULL, fb_len(), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-/* emuelec fbfix for n2 */
+/* turborama fbfix for n2 */
 	if (vinfo.yoffset != 0)
     {
         vinfo.yoffset = 0;
@@ -107,7 +107,7 @@ int fb_init(char *dev)
             exit(4);
         }
     }
-/* emuelec fbfix for n2 */
+/* turborama fbfix for n2 */
 	if (fb == MAP_FAILED)
 		goto failed;
 	init_colors();

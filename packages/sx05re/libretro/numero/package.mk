@@ -9,7 +9,7 @@ PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/nbarkhina/numero"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec/emulators"
+PKG_SECTION="turborama/emulators"
 PKG_SHORTDESC="TI-83 libretro core (Numero)"
 PKG_TOOLCHAIN="make"
 

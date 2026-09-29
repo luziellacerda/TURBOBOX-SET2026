@@ -8,7 +8,7 @@ PKG_LICENSE="GPL-3.0-or-later"
 PKG_SITE="https://www.6809.org.uk/xroar/"
 PKG_URL="https://www.6809.org.uk/xroar/dl/xroar-${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain SDL2 libpng zlib"
-PKG_SECTION="emuelec/emulators"
+PKG_SECTION="turborama/emulators"
 PKG_SHORTDESC="XRoar - Dragon/CoCo Emulator"
 PKG_TOOLCHAIN="autotools"
 
@@ -52,11 +52,11 @@ makeinstall_target() {
   cp ${PKG_DIR}/scripts/xroarstart.sh ${INSTALL}/usr/bin/xroarstart.sh
   chmod +x ${INSTALL}/usr/bin/xroarstart.sh
 
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/xroar
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/xroar
 
   if [ -f "${PKG_DIR}/config/xroar.gptk" ]; then
-    mkdir -p ${INSTALL}/usr/config/emuelec/configs/xroar/gptk
+    mkdir -p ${INSTALL}/usr/config/turborama/configs/xroar/gptk
     cp -f "${PKG_DIR}/config/xroar.gptk" \
-      "${INSTALL}/usr/config/emuelec/configs/xroar/gptk/xroar.gptk"
+      "${INSTALL}/usr/config/turborama/configs/xroar/gptk/xroar.gptk"
   fi
 }

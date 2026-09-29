@@ -15,9 +15,9 @@ PKG_BUILD_FLAGS="+lto"
 pre_configure_target() {
 
 if [ ${ARCH} == "arm" ]; then 
-	EE_ARCH="armv7l"
+	TURBORAMA_ARCH="armv7l"
 else
-	EE_ARCH=${ARCH}
+	TURBORAMA_ARCH=${ARCH}
 fi
 
   # Clean up build directory
@@ -30,7 +30,7 @@ fi
                              --enable-unaligned_memory \
                              --with-sdl-prefix=${SYSROOT_PREFIX}/usr"
 
-   PKG_CONFIGURE_OPTS_TARGET+=" --host=${EE_ARCH}"
+   PKG_CONFIGURE_OPTS_TARGET+=" --host=${TURBORAMA_ARCH}"
 
 }
 

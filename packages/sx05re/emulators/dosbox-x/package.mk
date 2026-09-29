@@ -44,9 +44,9 @@ fi
 
 post_makeinstall_target() {
   # Create config directory & install config
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/dosbox-x/
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/dosbox-x/
   cp -a ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin/
-  cp -a ${PKG_DIR}/config/*  ${INSTALL}/usr/config/emuelec/configs/dosbox-x/
+  cp -a ${PKG_DIR}/config/*  ${INSTALL}/usr/config/turborama/configs/dosbox-x/
   
 if [[ "${DEVICE}" == "GameForce" ]] || [[ "${DEVICE}" == "OdroidGoAdvance" ]] ; then
 	echo ${TOOLCHAIN}/${TARGET_NAME}/sysroot/usr/include/linux/gpio.h

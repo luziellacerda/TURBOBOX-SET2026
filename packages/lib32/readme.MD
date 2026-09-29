@@ -1,18 +1,18 @@
-# EmuELEC multilib packages
+# Turborama multilib packages
 ## Introduction
-These packages and the updated EmuELEC build system provides real **aarch64** + **aarch32** multilib support to the build system and the image. It brings the ``ld.so.conf`` and ``/usr/lib32`` style multilib support to the target system just like standard Linux distros, and there's no more need to do tedious ``LD_LIBRARY_PATH`` hacks! ``ldconfig`` binary and systemd units will index the libs and make multilib applications load much faster
+These packages and the updated Turborama build system provides real **aarch64** + **aarch32** multilib support to the build system and the image. It brings the ``ld.so.conf`` and ``/usr/lib32`` style multilib support to the target system just like standard Linux distros, and there's no more need to do tedious ``LD_LIBRARY_PATH`` hacks! ``ldconfig`` binary and systemd units will index the libs and make multilib applications load much faster
 
 ## Inclusion in build
-To get a multilib target image, the package ``lib32-essential`` must be added, in EmuELEC we achive this by including it in ``emuelec`` meta package's dependencies. Ideally this pacakge should be included first before other lib32 packages, but it can still work even it's added last.
+To get a multilib target image, the package ``lib32-essential`` must be added, in Turborama we achive this by including it in ``turborama`` meta package's dependencies. Ideally this pacakge should be included first before other lib32 packages, but it can still work even it's added last.
 
 ## Library search order
 
-On the EmuELEC target system, the libraries will be searched in the following order:
+On the Turborama target system, the libraries will be searched in the following order:
  - Any path defined in ``LD_LIBRARY_PATH``. Most of them come from /etc/profile. Not indexed in ``ld.so.cache`` (slow)
    - /etc/profile.d
-     - 99-emuelec.conf
-       - ``/emuelec/lib32`` => ``/storage/.config/emuelec/lib32``, writable
-       - ``/emuelec/lib`` => ``/storage/.config/emuelec/lib``, writable
+     - 99-turborama.conf
+       - ``/turborama/lib32`` => ``/storage/.config/turborama/lib32``, writable
+       - ``/turborama/lib`` => ``/storage/.config/turborama/lib``, writable
      - 99-rk-mali-workaround.conf (only on OdroidM1 and RK356x)
        - ``/usr/lib32/libmali``, read-only
  - Any path defined in ``ld.so.conf`` and ``ld.so.conf.d/*.conf``, *.conf files indexed in alphabetical order. Indexed in ``ld.so.cache`` (fast)
@@ -25,14 +25,14 @@ On the EmuELEC target system, the libraries will be searched in the following or
    - ``/usr/lib``, read-only
 
 If user wants to overwrite a certain library or provide additional libraries, they can achieve this in one of the following way:
- - Place it under ``/emuelec/lib32`` or ``/emuelec/lib``. **The libraries will be applied system-wide, not only for your user session(SSH/service)**
+ - Place it under ``/turborama/lib32`` or ``/turborama/lib``. **The libraries will be applied system-wide, not only for your user session(SSH/service)**
  - Place it anywhere else, and add the path to ``LD_LIBRARY_PATH``, this is suggested if the path is not indexed by ``ld.so.cache``, and you only want to use these libraries for a specific program/user session. Do note this is slow to lookup so don't add too many libraries.
  - **Do not add the paths that's already indexed by ``ld.so.cache`` to ``LD_LIBRARY_PATH``, unless you want to re-write the lookup order, as this will significantly slows down the lookup speed**
-   - Bad practice: (most paths in the following ``LD_LIBRARY_PATH`` is already indexed by ``ld.so.cache`` and this just adds meaningless search time) ``LD_LIBRARY_PATH=/emuelec/lib32:/emuelec/lib:/usr/lib32/pulseaudio:/usr/lib/pulseaudio:/usr/lib32:/usr/lib``
+   - Bad practice: (most paths in the following ``LD_LIBRARY_PATH`` is already indexed by ``ld.so.cache`` and this just adds meaningless search time) ``LD_LIBRARY_PATH=/turborama/lib32:/turborama/lib:/usr/lib32/pulseaudio:/usr/lib/pulseaudio:/usr/lib32:/usr/lib``
 ## Daemons
-The systemd unit ``ldconfig.service`` is what made it possible to drop ``LD_LIBRARY_PATH`` for the system-wide "static" libraries stored under ``/usr/lib`` and ``/usr/lib32`` (note it is still supported for out-of-tree paths like when you load ports, and the LD_LIBRARY_PATH is still used for ``/emuelec/libs``). 
+The systemd unit ``ldconfig.service`` is what made it possible to drop ``LD_LIBRARY_PATH`` for the system-wide "static" libraries stored under ``/usr/lib`` and ``/usr/lib32`` (note it is still supported for out-of-tree paths like when you load ports, and the LD_LIBRARY_PATH is still used for ``/turborama/libs``). 
 
-The ``ldconfig.service`` will refresh ``ld.so.cache`` every time EmuELEC boots, you can also manually run it with ``systemctl restart ldconfig`` or ``ldconfig -vX`` to refresh the cache.
+The ``ldconfig.service`` will refresh ``ld.so.cache`` every time Turborama boots, you can also manually run it with ``systemctl restart ldconfig`` or ``ldconfig -vX`` to refresh the cache.
 
 
 ## Image layout
@@ -59,7 +59,7 @@ The following part is different from non-multilib images, if ``lib32-essential``
     - ``ldconfig.service`` The systemd unit to rebuild ld cache on boot
 - ``/storage/.cache/ld.so.cache`` Actual ld cache
 
-The ``ld.so.conf`` and ``ld.so.conf.d`` are very similar to those you will find on standard Linux distros like ArchLinux, Debian, Ubuntu, etc, even they will have some differences. A Big difference is that we keep ``ld.so.cache`` at ``/storage/.cache/`` instead of ``/etc/`` since on EmuELEC ``/etc/`` is read-only.
+The ``ld.so.conf`` and ``ld.so.conf.d`` are very similar to those you will find on standard Linux distros like ArchLinux, Debian, Ubuntu, etc, even they will have some differences. A Big difference is that we keep ``ld.so.cache`` at ``/storage/.cache/`` instead of ``/etc/`` since on Turborama ``/etc/`` is read-only.
 
 ## Package requirement
 To add packages here, the following requirement must be met:
@@ -139,9 +139,9 @@ All pacakges under this folder should have the similiar parent folders as the ou
   - box86 (sx05re/emulators/box86) => lib32-box86 (lib32/sx05re/emulators/lib32-box86)
 
 But there's still exceptions that're allowed here:
- - If its corresponding generic version is placed deeply in ``sx05re``, it can be moved to to ``emuelec``, or other corresponding greater types. For the ease of looking up. E.g.
+ - If its corresponding generic version is placed deeply in ``sx05re``, it can be moved to to ``turborama``, or other corresponding greater types. For the ease of looking up. E.g.
    - ``sx05re/tools/SDL2/SDL2_mixer`` => ``lib32/audio/lib32-SDL2_mixer``
-   - ``sx05re/libretro/mupen64plus`` => ``lib32/emuelec/libretro/lib32-mupen64plus``
+   - ``sx05re/libretro/mupen64plus`` => ``lib32/turborama/libretro/lib32-mupen64plus``
  - If it's a project/device-specific package, it can be moved to meaningful greater types. E.g.
    - ``projects/Amlogic-ce/devices/Amlogic-ng/packages/opengl-meson`` => ``lib32/graphics/lib32-opengl-meson``. Note this package also combines the ``opengl-meson`` from ``Amlogic-old`` device
    - ``projects/Rockchip/packages/libgo2`` => ``lib32/sysutils/lib32-libgo2``
@@ -158,7 +158,7 @@ In the header, please keep the older contributors and then add your name like th
 
 If you just copy/paste these packages to other projects blindly, **they won't build!!!** They'll most likely corrupt your build folder and toolchain which can only be rescued by ``make clean``
 
-These packages will only work with a build system that recognizes the PKG_BUILD_FLAGS ``lib32`` and/or ``lib32:[target]``, if you come from other distros and want to port these packages, the following part in the build system must also be ported, i.e. these are also what made it possible to build them in EmuELEC itself:
+These packages will only work with a build system that recognizes the PKG_BUILD_FLAGS ``lib32`` and/or ``lib32:[target]``, if you come from other distros and want to port these packages, the following part in the build system must also be ported, i.e. these are also what made it possible to build them in Turborama itself:
 - ``config/options32`` adds a series of ``LIB32_`` and ``LIB64_`` prefixed variables
 - ``config/options`` adds a check to invoke ``config/options32`` for ``aarch64`` build
 - ``config/functions`` adds a function ``use_32_options()`` to replace key variables to 32-bit versions
@@ -166,4 +166,4 @@ These packages will only work with a build system that recognizes the PKG_BUILD_
 - ``scripts/install`` adds two more folders to exclude when installing packages (not essential)
 - ``glibc`` should be patched to use ``/storage/.cache/ld.so.cache`` instead of ``/etc/ld.so.cache`` for ``LD_SO_CACHE``
 
-Additionally, these changes expect a build system that has the changes introduced in [the PR](https://github.com/LibreELEC/LibreELEC.tv/pull/4042) that's merged in upstream LibreELEC in 2019, and EmuELEC's build system didn't have these changes until Oct, 2021. I haven't tested if this will work with an older build system, so you should pay attention if you want to make these changes work in your project's build system.
+Additionally, these changes expect a build system that has the changes introduced in [the PR](https://github.com/LibreELEC/LibreELEC.tv/pull/4042) that's merged in upstream LibreELEC in 2019, and Turborama's build system didn't have these changes until Oct, 2021. I haven't tested if this will work with an older build system, so you should pay attention if you want to make these changes work in your project's build system.

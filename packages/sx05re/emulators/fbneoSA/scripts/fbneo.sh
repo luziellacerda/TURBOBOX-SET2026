@@ -20,17 +20,17 @@ add_player_hat()
     fi
 }
 
-mkdir -p /emuelec/configs/fbneo/config
+mkdir -p /turborama/configs/fbneo/config
 mkdir -p /storage/.local/share
 
 if [ -d "/storage/.local/share/fbneo/" ]; then
-    mv -f /storage/.local/share/fbneo/* /emuelec/configs/fbneo
+    mv -f /storage/.local/share/fbneo/* /turborama/configs/fbneo
     rm -rf /storage/.local/share/fbneo
-    ln -sf /emuelec/configs/fbneo /storage/.local/share/fbneo
+    ln -sf /turborama/configs/fbneo /storage/.local/share/fbneo
 fi
 
 if [ ! -L "/storage/.local/share/fbneo" ]; then
-    ln -sf /emuelec/configs/fbneo /storage/.local/share/fbneo
+    ln -sf /turborama/configs/fbneo /storage/.local/share/fbneo
 fi
 
 add_player_hat 1
@@ -51,10 +51,10 @@ ROM=$(basename -- "${1}")
 ROM="${ROM%.*}"
 DIR=$(dirname ${1})
 
-sed -i "s|szAppRomPaths\[0\].*|szAppRomPaths\[0\] ${DIR}/|" /emuelec/configs/fbneo/config/fbneo.ini
+sed -i "s|szAppRomPaths\[0\].*|szAppRomPaths\[0\] ${DIR}/|" /turborama/configs/fbneo/config/fbneo.ini
 
 export LIBGL_NOBANNER=1
 export LIBGL_SILENTSTUB=1
 
-fbfix $( emuelec-utils getmainfb )
-fbneo -joy -fullscreen "${ROM}" ${EXTRAOPTS} >> /emuelec/logs/emuelec.log 2>&1
+fbfix $( turborama-utils getmainfb )
+fbneo -joy -fullscreen "${ROM}" ${EXTRAOPTS} >> /turborama/logs/turborama.log 2>&1

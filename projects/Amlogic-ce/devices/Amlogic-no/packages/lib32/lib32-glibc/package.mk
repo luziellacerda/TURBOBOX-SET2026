@@ -149,6 +149,6 @@ post_makeinstall_target() {
   safe_remove ${INSTALL}/var
   mkdir -p "${INSTALL}/etc/ld.so.conf.d"
     echo "/usr/lib32" > "${INSTALL}/etc/ld.so.conf.d/lib32-glibc.conf"
-    # printf "/emuelec/lib32\n/emuelec/lib\n" > "${INSTALL}/etc/ld.so.conf.d/emuelec.conf"
+    # printf "/turborama/lib32\n/turborama/lib\n" > "${INSTALL}/etc/ld.so.conf.d/turborama.conf"
   mv ${INSTALL}/usr/lib ${INSTALL}/usr/lib32
 }

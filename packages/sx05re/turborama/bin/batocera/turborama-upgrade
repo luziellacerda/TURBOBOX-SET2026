@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Both frontend and forced updates use the same checksum and device validation.
+case "${1:-update}" in
+  canupdate)
+    if available=$(/usr/bin/updatecheck.sh canupdate) && [[ "$available" != no && -n "$available" ]]; then
+      printf '%s\n' "$available"
+      exit 0
+    fi
+    exit 12
+    ;;
+  update)
+    # The frontend owns its confirmation and reboot prompt; do not stop it here.
+    exec /usr/bin/updatecheck.sh stageupdate
+    ;;
+  *) exit 1 ;;
+esac

@@ -30,11 +30,11 @@ fi
 }
 
 makeinstall_target() {
-  mkdir -p ${INSTALL}/usr/config/emuelec/bin/box64/lib
-  cp ${PKG_BUILD}/x64lib/* ${INSTALL}/usr/config/emuelec/bin/box64/lib
-  cp ${PKG_BUILD}/.${TARGET_NAME}/box64 ${INSTALL}/usr/config/emuelec/bin/box64/
+  mkdir -p ${INSTALL}/usr/config/turborama/bin/box64/lib
+  cp ${PKG_BUILD}/x64lib/* ${INSTALL}/usr/config/turborama/bin/box64/lib
+  cp ${PKG_BUILD}/.${TARGET_NAME}/box64 ${INSTALL}/usr/config/turborama/bin/box64/
   
   mkdir -p ${INSTALL}/etc/binfmt.d
-  ln -sf /emuelec/configs/box64.conf ${INSTALL}/etc/binfmt.d/box64.conf
+  ln -sf /turborama/configs/box64.conf ${INSTALL}/etc/binfmt.d/box64.conf
  
 }

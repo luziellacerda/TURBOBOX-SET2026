@@ -13,8 +13,8 @@ ROMBASE="${ROMNAME%.*}"
 killall -9 gptokeyb 2>/dev/null
 
 # Check for game-specific gptk config
-GPTK_GAME="/storage/.config/emuelec/configs/gptokeyb/simcoupe/${ROMBASE}.gptk"
-GPTK_DEFAULT="/emuelec/configs/gptokeyb/simcoupe.gptk"
+GPTK_GAME="/storage/.config/turborama/configs/gptokeyb/simcoupe/${ROMBASE}.gptk"
+GPTK_DEFAULT="/turborama/configs/gptokeyb/simcoupe.gptk"
 
 if [ -f "$GPTK_GAME" ]; then
     GPTK_CONFIG="$GPTK_GAME"

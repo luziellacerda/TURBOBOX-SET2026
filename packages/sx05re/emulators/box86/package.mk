@@ -20,11 +20,11 @@ else
 fi
 
 makeinstall_target() {
-  mkdir -p ${INSTALL}/usr/config/emuelec/bin/box86/lib
-  cp ${PKG_BUILD}/x86lib/* ${INSTALL}/usr/config/emuelec/bin/box86/lib
-  cp ${PKG_BUILD}/.${TARGET_NAME}/box86 ${INSTALL}/usr/config/emuelec/bin/box86/
+  mkdir -p ${INSTALL}/usr/config/turborama/bin/box86/lib
+  cp ${PKG_BUILD}/x86lib/* ${INSTALL}/usr/config/turborama/bin/box86/lib
+  cp ${PKG_BUILD}/.${TARGET_NAME}/box86 ${INSTALL}/usr/config/turborama/bin/box86/
   
   mkdir -p ${INSTALL}/etc/binfmt.d
-  ln -sf /emuelec/configs/box86.conf ${INSTALL}/etc/binfmt.d/box86.conf
+  ln -sf /turborama/configs/box86.conf ${INSTALL}/etc/binfmt.d/box86.conf
  
 }

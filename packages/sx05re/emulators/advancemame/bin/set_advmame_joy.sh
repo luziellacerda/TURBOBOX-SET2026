@@ -75,10 +75,10 @@ declare GC_ORDER=(
 declare -A GC_NAMES=()
 
 get_button_cfg() {
-	local BTN_INDEX=$(get_ee_setting "joy_btn_index" "${PLATFORM}" "${ROMNAME}")
+	local BTN_INDEX=$(get_turborama_setting "joy_btn_index" "${PLATFORM}" "${ROMNAME}")
   if [[ ! -z ${BTN_INDEX} ]]; then
 		local BTN_SETTING="AdvanceMame.joy_btn_order.${BTN_INDEX}"
-    local BTN_CFG_TMP="$(get_ee_setting ${BTN_SETTING})"
+    local BTN_CFG_TMP="$(get_turborama_setting ${BTN_SETTING})"
 		[[ ! -z ${BTN_CFG_TMP} ]] && BTN_CFG="${BTN_CFG_TMP}"
 	fi
 	echo "${BTN_CFG}"
@@ -122,7 +122,7 @@ set_pad(){
   ADVMAME_VALUES["a1,1"]="stick,x,left"
   ADVMAME_VALUES["a1,2"]="stick,x,right"
 
-local INVERT_AXIS=$(get_ee_setting "advmame_invert_axis")
+local INVERT_AXIS=$(get_turborama_setting "advmame_invert_axis")
   if [[ ${INVERT_AXIS} == 1 ]]; then
       ADVMAME_VALUES["a1,1"]="stick,y,up"
       ADVMAME_VALUES["a1,2"]="stick,y,down"
@@ -150,7 +150,7 @@ local INVERT_AXIS=$(get_ee_setting "advmame_invert_axis")
     [leftx]="0,1"
     [lefty]="2,3"
   )
-  local ADD_HAT=$(get_ee_setting advmame_add_hat)
+  local ADD_HAT=$(get_turborama_setting advmame_add_hat)
   local i=1
   set -f
   local GC_ARRAY=(${GC_MAP//,/ })

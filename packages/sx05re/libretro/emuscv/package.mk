@@ -8,7 +8,7 @@ PKG_SITE="https://gitlab.com/MaaaX-EmuSCV/libretro-emuscv"
 PKG_URL="${PKG_SITE}.git"
 
 PKG_ARCH="any"
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_DEPENDS_TARGET="toolchain SDL2 zlib"
 PKG_SHORTDESC="EmuSCV libretro core"
 PKG_TOOLCHAIN="make"

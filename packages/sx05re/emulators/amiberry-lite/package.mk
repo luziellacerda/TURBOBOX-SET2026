@@ -48,7 +48,7 @@ makeinstall_target() {
   UAE="${INSTALL}/usr/config/amiberry-lite/conf/*.uae"
   for i in ${UAE}; do echo -e "gfx_center_vertical=smart\ngfx_center_horizontal=smart" >> ${i}; done
 
-  mkdir -p "${INSTALL}/usr/config/emuelec/configs"
-  ln -sf "/storage/.config/amiberry-lite" "${INSTALL}/usr/config/emuelec/configs/amiberry-lite"
+  mkdir -p "${INSTALL}/usr/config/turborama/configs"
+  ln -sf "/storage/.config/amiberry-lite" "${INSTALL}/usr/config/turborama/configs/amiberry-lite"
 
 }

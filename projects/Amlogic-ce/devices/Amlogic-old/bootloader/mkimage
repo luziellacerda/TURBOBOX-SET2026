@@ -54,4 +54,4 @@ if [ -n ${SUBDEVICE} ]; then
 fi
 
 # Include older alternative kernel for Amlogic-old
-  mcopy $RELEASE_DIR/3rdparty/bootloader/old_ee_3.14_kernel.7z ::
+  mcopy $RELEASE_DIR/3rdparty/bootloader/old_turborama_3.14_kernel.7z ::

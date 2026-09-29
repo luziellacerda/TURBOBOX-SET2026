@@ -16,7 +16,7 @@ CONFIG_TMP_A="/tmp/jc/SDLflycastA.tmp"
 CONFIG_TMP_D="/tmp/jc/SDLflycastD.tmp"
 CONFIG_TMP_E="/tmp/jc/SDLflycastE.tmp"
 
-BTN_H0=$(get_ee_setting flycast_btn_h0)
+BTN_H0=$(get_turborama_setting flycast_btn_h0)
 [[ -z "${BTN_H0}" ]] && BTN_H0=255
 
 declare -A FLYCAST_D_INDEXES=(
@@ -49,13 +49,13 @@ declare -A FLYCAST_D_BUTTONS=(
   [righty]="axis_right_y"
 )
 
-BTN_SWAP_XY=$(get_ee_setting flycast_joy_swap_xy)
+BTN_SWAP_XY=$(get_turborama_setting flycast_joy_swap_xy)
 if [[ "${BTN_SWAP_XY}" == "1" ]]; then
   FLYCAST_D_BUTTONS[x]="btn_x"
   FLYCAST_D_BUTTONS[y]="btn_y"
 fi
 
-BTN_SWAP_AB=$(get_ee_setting flycast_joy_swap_ab)
+BTN_SWAP_AB=$(get_turborama_setting flycast_joy_swap_ab)
 if [[ "${BTN_SWAP_AB}" == "1" ]]; then
   FLYCAST_D_BUTTONS[a]="btn_a"
   FLYCAST_D_BUTTONS[b]="btn_b"
@@ -102,7 +102,7 @@ set_pad() {
 
 
   local device1=1
-  local RUMBLE=$(get_ee_setting ee_rumble_strength)
+  local RUMBLE=$(get_turborama_setting turborama_rumble_strength)
   [[ -z "${RUMBLE}" ]] && RUMBLE=0
   [[ "${RUMBLE}" -gt "0" ]] && device1=3
 
@@ -192,7 +192,7 @@ init_config() {
     return
   fi
 
-  local RUMBLE=$(get_ee_setting ee_rumble_strength)
+  local RUMBLE=$(get_turborama_setting turborama_rumble_strength)
   [[ -z "${RUMBLE}" ]] && RUMBLE=0
 
   jc_set_record "${EMU_FILE}" "\[input\]" "VirtualGamepadVibration" "${RUMBLE}"

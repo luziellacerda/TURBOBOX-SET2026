@@ -1,7 +1,7 @@
 [Unit]
 Description=Create libMali overlay for specific AML device
 After=var.mount
-Before=emuelec-autostart.service
+Before=turborama-autostart.service
 
 [Service]
 Type=oneshot

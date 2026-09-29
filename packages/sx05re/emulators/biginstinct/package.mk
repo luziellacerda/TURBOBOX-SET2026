@@ -9,7 +9,7 @@ PKG_LICENSE="Proprietary"
 PKG_SITE="https://www.richwhitehouse.com/ki"
 PKG_URL="https://www.richwhitehouse.com/ki/builds/BigInstinct_LinuxARM64_v${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec/emulators"
+PKG_SECTION="turborama/emulators"
 PKG_SHORTDESC="BigInstinct - Killer Instinct Arcade Emulator"
 PKG_TOOLCHAIN="manual"
 

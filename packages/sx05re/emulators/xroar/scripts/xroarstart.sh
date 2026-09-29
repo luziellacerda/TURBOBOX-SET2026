@@ -68,8 +68,8 @@ fi
 killall -9 gptokeyb 2>/dev/null
 
 # Check for game-specific gptk config
-GPTK_GAME="/storage/.config/emuelec/configs/xroar/gptk/${ROMBASE}.gptk"
-GPTK_DEFAULT="/usr/config/emuelec/configs/xroar/gptk/xroar.gptk"
+GPTK_GAME="/storage/.config/turborama/configs/xroar/gptk/${ROMBASE}.gptk"
+GPTK_DEFAULT="/usr/config/turborama/configs/xroar/gptk/xroar.gptk"
 
 if [ -f "$GPTK_GAME" ]; then
     GPTK_CONFIG="$GPTK_GAME"

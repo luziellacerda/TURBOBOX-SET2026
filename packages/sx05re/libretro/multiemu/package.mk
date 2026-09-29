@@ -63,9 +63,9 @@ make_target() {
 makeinstall_target() {
   mkdir -p $INSTALL/usr/lib/libretro
   cp *.so $INSTALL/usr/lib/libretro/
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/multiemu
-  cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/emuelec/configs/multiemu
-  cp -rf $PKG_BUILD/hash/fmtowns_cd.xml ${INSTALL}/usr/config/emuelec/configs/multiemu/hash
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/multiemu
+  cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/turborama/configs/multiemu
+  cp -rf $PKG_BUILD/hash/fmtowns_cd.xml ${INSTALL}/usr/config/turborama/configs/multiemu/hash
   mkdir -p ${INSTALL}/usr/bin
   cp -rf ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin
 }

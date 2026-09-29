@@ -24,9 +24,9 @@ void read_script_output(const std::string& cmd) {
         return;
     }
 
-    std::ofstream logfile("/emuelec/logs/sdlterm.log", std::ios::out | std::ios::trunc);
+    std::ofstream logfile("/turborama/logs/sdlterm.log", std::ios::out | std::ios::trunc);
     if (!logfile) {
-        std::cerr << "[ERROR] Could not open log file /emuelec/logs/sdlterm.log\n";
+        std::cerr << "[ERROR] Could not open log file /turborama/logs/sdlterm.log\n";
     } else {
         logfile << "Output for: " << cmd << "\n\n";
     }
@@ -66,7 +66,7 @@ void draw_filled_circle(SDL_Renderer* renderer, int cx, int cy, int radius) {
 }
 
 int main(int argc, char* argv[]) {
-    std::string title = "EmuELEC";
+    std::string title = "Turborama";
     std::string run_cmd;
     std::string run_args;
     bool wait_after_finish = false;
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
         if (arg == "--title" && i + 1 < argc) {
-            title = std::string("EmuELEC - ") + argv[++i];
+            title = std::string("Turborama - ") + argv[++i];
         } else if (arg == "--run" && i + 1 < argc) {
             run_cmd = argv[++i];
         } else if ((arg == "--runargs" || arg == "--args") && i + 1 < argc) {

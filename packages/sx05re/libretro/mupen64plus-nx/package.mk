@@ -23,22 +23,22 @@ PKG_MAKE_OPTS_TARGET+=" HAVE_PARALLEL_RDP=1 HAVE_PARALLEL_RSP=1 HAVE_THR_AL=1 LL
 
 if [ ${ARCH} == "arm" ]; then
 	if [ "${DEVICE}" = "Amlogic-old" ]; then
-		PKG_MAKE_OPTS_TARGET+=" platform=emuelec BOARD=OLD32BIT"
+		PKG_MAKE_OPTS_TARGET+=" platform=turborama BOARD=OLD32BIT"
 	elif [ "${DEVICE}" = "OdroidGoAdvance" ] || [ "${DEVICE}" == "GameForce" ]; then
 		sed -i "s|cortex-a53|cortex-a35|g" Makefile
 		PKG_MAKE_OPTS_TARGET+=" platform=odroidgoa"
 	elif [ "${DEVICE}" == "OdroidM1" ] || [ "${DEVICE}" == "RK356x" ]; then
-		PKG_MAKE_OPTS_TARGET+=" platform=emuelec BOARD=NGRK32BIT"
+		PKG_MAKE_OPTS_TARGET+=" platform=turborama BOARD=NGRK32BIT"
 	else
 		PKG_MAKE_OPTS_TARGET+=" platform=AMLG12B"
 	fi
 else
 	if [ "${DEVICE}" = "Amlogic-old" ]; then 
-		PKG_MAKE_OPTS_TARGET+=" platform=emuelec BOARD=OLD"
+		PKG_MAKE_OPTS_TARGET+=" platform=turborama BOARD=OLD"
 	elif [ "${DEVICE}" == "OdroidM1" ] || [ "${DEVICE}" == "RK356x" ]; then
-		PKG_MAKE_OPTS_TARGET+=" platform=emuelec BOARD=NGRK"
+		PKG_MAKE_OPTS_TARGET+=" platform=turborama BOARD=NGRK"
 	elif [ "${DEVICE}" = "OdroidGoAdvance" ] || [ "${DEVICE}" == "GameForce" ]; then
-		PKG_MAKE_OPTS_TARGET+=" platform=emuelec BOARD=NGHH"
+		PKG_MAKE_OPTS_TARGET+=" platform=turborama BOARD=NGHH"
 	else
 		PKG_MAKE_OPTS_TARGET+=" platform=odroid64 BOARD=N2"
 	fi

@@ -6,8 +6,8 @@
 . /etc/profile
 
 # We cd into this directory before starting ecwolf
-RUN_DIR="/emuelec/configs/ecwolf"
-CONFIG_DIR="/emuelec/configs/ecwolf"
+RUN_DIR="/turborama/configs/ecwolf"
+CONFIG_DIR="/turborama/configs/ecwolf"
 CONFIG_FILE="${CONFIG_DIR}/ecwolf.cfg"
 
 params=" --config ${CONFIG_FILE} --savedir ${CONFIG_DIR}"
@@ -54,6 +54,6 @@ fi
 # to put them in subdirectories. ecwolf on the other side has no command line
 # parameter to switch to such a subdir, so you have to cd into that dir first.
 cd "${RUN_DIR}"
-# Do not overwrite log messages already written by emuelecRunEmu.sh
-ecwolf ${params} >> /emuelec/logs/emuelec.log 2>&1
+# Do not overwrite log messages already written by turboramaRunEmu.sh
+ecwolf ${params} >> /turborama/logs/turborama.log 2>&1
 

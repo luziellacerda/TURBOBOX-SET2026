@@ -11,8 +11,8 @@ PLATFORM=${2}
 ROMNAME="${3}"
 
 RA_CONFIG="/storage/.config/retroarch/retroarch.cfg"
-RA_RBASE="emuelec:/retroarch-saves"
-RC_LOG="/emuelec/logs/rclone.log"
+RA_RBASE="turborama:/retroarch-saves"
+RC_LOG="/turborama/logs/rclone.log"
 RCLONE_ARGS=" --log-file=${RC_LOG} --log-level DEBUG --transfers 2 --checkers 2 --contimeout 30s --timeout 120s --retries 3 --low-level-retries 10 --stats 1s"
 
 DEBUG=1
@@ -52,7 +52,7 @@ if [[ "${ACTION}" == "get" || "${ACTION}" == "set" ]]; then
   
 fi
 
-RUNSYNC=$(get_ee_setting cloudsave "${PLATFORM}"  "${ROMNAME}")
+RUNSYNC=$(get_turborama_setting cloudsave "${PLATFORM}"  "${ROMNAME}")
 if [[ "${RUNSYNC}" == "1" ]]; then
   rclone mkdir "${RA_RBASE}"
   wait

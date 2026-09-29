@@ -58,6 +58,6 @@ mkdir -p ${INSTALL}/usr/bin
 cp -a ${PKG_BUILD}/src/retro_arena/yabasanshiro ${INSTALL}/usr/bin
 cp -a ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin
 
-mkdir -p ${INSTALL}/usr/config/emuelec/configs/yabasanshiro
-cp ${PKG_DIR}/config/* ${INSTALL}/usr/config/emuelec/configs/yabasanshiro
+mkdir -p ${INSTALL}/usr/config/turborama/configs/yabasanshiro
+cp ${PKG_DIR}/config/* ${INSTALL}/usr/config/turborama/configs/yabasanshiro
 } 

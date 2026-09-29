@@ -16,9 +16,9 @@ PKG_BUILD_FLAGS="-lto"
 
 
 if [[ "${ARCH}" == "arm" ]]; then
-	PKG_PATCH_DIRS="emuelec-arm32"
+	PKG_PATCH_DIRS="turborama-arm32"
 else
-	PKG_PATCH_DIRS="emuelec-aarch64"
+	PKG_PATCH_DIRS="turborama-aarch64"
 fi
 
 pre_configure_target() {
@@ -34,12 +34,12 @@ if [[ "${ARCH}" == "arm" ]]; then
 		PKG_MAKE_OPTS_TARGET=" platform=Odroidgoa-RK356x"
 	fi
 else
-	PKG_PATCH_DIRS="emuelec-aarch64"
-	PKG_MAKE_OPTS_TARGET=" platform=emuelec64-armv8"
+	PKG_PATCH_DIRS="turborama-aarch64"
+	PKG_MAKE_OPTS_TARGET=" platform=turborama64-armv8"
 	
 	if [ "${DEVICE}" == "OdroidGoAdvance" ] || [ "${DEVICE}" == "GameForce" ]; then
 		#todo add odroidgoadvance to 64bits
-		PKG_MAKE_OPTS_TARGET=" platform=emuelec64-armv8"
+		PKG_MAKE_OPTS_TARGET=" platform=turborama64-armv8"
 	fi
 fi
 }

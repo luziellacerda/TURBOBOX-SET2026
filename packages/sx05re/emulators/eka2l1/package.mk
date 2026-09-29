@@ -8,7 +8,7 @@ PKG_URL="${PKG_SITE}.git"
 PKG_GIT_CLONE_BRANCH="master"
 PKG_GIT_SUBMODULES="yes"
 PKG_DEPENDS_TARGET="toolchain SDL2 freetype zlib wayland"
-PKG_SECTION="emuelec/emulators"
+PKG_SECTION="turborama/emulators"
 PKG_SHORTDESC="Symbian OS / N-Gage emulator for aarch64 Linux"
 PKG_TOOLCHAIN="cmake"
 
@@ -37,7 +37,7 @@ pre_configure_target() {
   echo "// stub" > ${PKG_BUILD}/src/emu/drivers/src/graphics/backend/context_glx.cpp
   echo "// stub" > ${PKG_BUILD}/src/emu/drivers/src/graphics/backend/vulkan/graphics_vulkan.cpp
 
-  # EGL compatibility: Add _KHR suffix for older EGL headers (LibreELEC/EmuELEC)
+  # EGL compatibility: Add _KHR suffix for older EGL headers (LibreELEC/Turborama)
   find ${PKG_BUILD}/src/emu/drivers -type f \( -name "*.cpp" -o -name "*.c" -o -name "*.h" \) | while read f; do
     sed -i 's/\bEGL_CONTEXT_MAJOR_VERSION\b/EGL_CONTEXT_MAJOR_VERSION_KHR/g' "$f"
     sed -i 's/\bEGL_CONTEXT_MINOR_VERSION\b/EGL_CONTEXT_MINOR_VERSION_KHR/g' "$f"
@@ -103,6 +103,6 @@ makeinstall_target() {
   chmod +x "${INSTALL}/usr/bin/ekastart.sh"
 
   # Gamepad config
-  mkdir -p "${INSTALL}/usr/config/emuelec/configs/eka2l1/gptk"
-  cp -f "${PKG_DIR}/config/eka.gptk" "${INSTALL}/usr/config/emuelec/configs/eka2l1/gptk/eka.gptk"
+  mkdir -p "${INSTALL}/usr/config/turborama/configs/eka2l1/gptk"
+  cp -f "${PKG_DIR}/config/eka.gptk" "${INSTALL}/usr/config/turborama/configs/eka2l1/gptk/eka.gptk"
 }

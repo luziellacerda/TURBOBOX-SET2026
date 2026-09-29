@@ -15,19 +15,19 @@ pre_configure_target() {
 	CFLAGS+=" -I$(get_build_dir linux)/tools/include"
 	PKG_MAKE_OPTS_TARGET=" config=release ARCH=" 
 
-	sed -i "s|/storage/.config/distribution/|/emuelec/|g" ${PKG_BUILD}/src/main.cpp
+	sed -i "s|/storage/.config/distribution/|/turborama/|g" ${PKG_BUILD}/src/main.cpp
 	rm ${PKG_BUILD}/retrorun
 }
 
 makeinstall_target() {
 	mkdir -p ${INSTALL}/usr/bin
-	mkdir -p ${INSTALL}/usr/config/emuelec/configs/
+	mkdir -p ${INSTALL}/usr/config/turborama/configs/
 	if [ ${ARCH} == "arm" ]; then
 		cp retrorun $INSTALL/usr/bin/retrorun32
 	else
 		cp retrorun ${INSTALL}/usr/bin/retrorun
 	fi
-	cp ${PKG_BUILD}/setting.cfg ${INSTALL}/usr/config/emuelec/configs/retrorun.cfg
+	cp ${PKG_BUILD}/setting.cfg ${INSTALL}/usr/config/turborama/configs/retrorun.cfg
 	
 	
 }

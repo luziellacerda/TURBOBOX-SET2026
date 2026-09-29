@@ -21,7 +21,7 @@ pre_makeinstall_target() {
 mkdir -p ${INSTALL}/usr/bin
 cp ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin
 
-mkdir -p ${INSTALL}/usr/config/emuelec/configs/solarus
-cp ${PKG_DIR}/config/* ${INSTALL}/usr/config/emuelec/configs/solarus
+mkdir -p ${INSTALL}/usr/config/turborama/configs/solarus
+cp ${PKG_DIR}/config/* ${INSTALL}/usr/config/turborama/configs/solarus
 
 }

@@ -10,7 +10,7 @@ PKG_SITE="https://github.com/nwhitehead/pzretro"
 PKG_URL="${PKG_SITE}.git"
 
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_SHORTDESC="pzretro libretro core (PuzzleScript)"
 PKG_LONGDESC="Libretro core for playing PuzzleScript games using QuickJS."
 PKG_TOOLCHAIN="manual"

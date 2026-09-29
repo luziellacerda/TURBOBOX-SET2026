@@ -42,9 +42,9 @@ done
 
 set_audio alsa
 
-[[ -f "/ee_s905" ]] && mv /storage/.config/asound.conf /storage/.config/asound.confs
+[[ -f "/turborama_s905" ]] && mv /storage/.config/asound.conf /storage/.config/asound.confs
 ${REICASTBIN} "$1" &>/dev/null
-[[ -f "/ee_s905" ]] && mv /storage/.config/asound.confs /storage/.config/asound.conf
+[[ -f "/turborama_s905" ]] && mv /storage/.config/asound.confs /storage/.config/asound.conf
 
 /usr/bin/setres.sh
  

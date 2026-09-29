@@ -47,4 +47,5 @@ local.conf
 sx05re-kodi*.log
 
 packages/sx05re/experimental/
-packages/sx05re/emuelec-emulationstation/api_keys.txt
+packages/sx05re/turborama-emulationstation/api_keys.txt
+tests/__pycache__/

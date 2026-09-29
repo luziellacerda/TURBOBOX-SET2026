@@ -58,15 +58,15 @@ if [ -e /storage/.please_resize_me ] ; then
     DISK_NAME=$(basename $DISK)
     DISK_SECTORS=$(cat "/sys/block/$DISK_NAME/size") # Obtain the disk sectors count, each sector is always 512 Bytes large, independent of the underlying device, according to https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/include/linux/types.h#n117
     DISK_SIZE=$(( $DISK_SECTORS * 512 )) # Calculate the disk actual size, in byte
-    if [ $DISK_SIZE -gt 8589934592 ]; then # The optimal behaviour, this will leave 6GiB to storage, and create the EEROMS partition
+    if [ $DISK_SIZE -gt 8589934592 ]; then # The optimal behaviour, this will leave 6GiB to storage, and create the TURBOROMS partition
       ROMS_CREATE='yes'
       STORAGE_END='8GiB'
-    elif [ $DISK_SIZE -gt 3221225472 ]; then  # Optionaly omit the EEROMS partition for 4GB cards/drives
+    elif [ $DISK_SIZE -gt 3221225472 ]; then  # Optionaly omit the TURBOROMS partition for 4GB cards/drives
       ROMS_CREATE=''
       ROMS_OMIT_MANUAL=''
       STORAGE_END='100%'
     else
-      # The bare minumum a EmuELEC image itself needs is 2186280960, but after adding in user configs things become uncontrollable, so we don't care about disks with size between 2085MiB and 3GiB
+      # The bare minumum a Turborama image itself needs is 2186280960, but after adding in user configs things become uncontrollable, so we don't care about disks with size between 2085MiB and 3GiB
       echo 'ERROR: You disk is too small! You need to use a USB drive/SD card that is at least 4GB!'
       echo 'ERROR: You should NOT try to boot up this drive as it is NOT properly resized!'
       StartProgress countdown "Powering off in 30s...     " 30 "NOW"
@@ -85,14 +85,14 @@ if [ -e /storage/.please_resize_me ] ; then
     fi
     
     if [ "$ROMS_CREATE" ]; then
-      # EmueELEC Get EEROMS filetype
+      # Get TURBOROMS filetype
       ROM_FS_TYPE="vfat"
       PARTED_FS_TYPE="fat32"
 
-      if [ -e "/flash/ee_fstype" ]; then
-        EE_FS_TYPE=$(cat "/flash/ee_fstype")
+      if [ -e "/flash/turborama_fstype" ]; then
+        TURBORAMA_FS_TYPE=$(cat "/flash/turborama_fstype")
         
-        case $EE_FS_TYPE in
+        case $TURBORAMA_FS_TYPE in
         "ntfs")
             ROM_FS_TYPE="ntfs"
             PARTED_FS_TYPE="ntfs"
@@ -124,28 +124,28 @@ if [ -e /storage/.please_resize_me ] ; then
     StartProgress spinner "Checking file system... " "e2fsck -f -p $PART &>/dev/null"
     StartProgress spinner "Resizing file system... " "resize2fs $PART &>/dev/null"
     if [ "$ROMS_CREATE" ]; then
-      StartProgress spinner "Creating EEROMS partition..." "parted -s -a optimal -m $DISK mkpart primary ${PARTED_FS_TYPE} ${STORAGE_END} 100% &>/dev/null"
+      StartProgress spinner "Creating TURBOROMS partition..." "parted -s -a optimal -m $DISK mkpart primary ${PARTED_FS_TYPE} ${STORAGE_END} 100% &>/dev/null"
       partprobe &>/dev/null
       case $ROM_FS_TYPE in 
         "ntfs")
-        StartProgress spinner "Formatting EEROMS partition as NTFS..." "mkfs.ntfs -L EEROMS -f ${ROMS_PART_NAME} &>/dev/null"
+        StartProgress spinner "Formatting TURBOROMS partition as NTFS..." "mkfs.ntfs -L TURBOROMS -f ${ROMS_PART_NAME} &>/dev/null"
         ;;
         "ext4")
-        StartProgress spinner "Formatting EEROMS partition as EXT4..." "mkfs.ext4 -L EEROMS -t ext4 -O 64bit ${ROMS_PART_NAME} &>/dev/null"
+        StartProgress spinner "Formatting TURBOROMS partition as EXT4..." "mkfs.ext4 -L TURBOROMS -t ext4 -O 64bit ${ROMS_PART_NAME} &>/dev/null"
         ;;
         "exfat")
-        StartProgress spinner "Formatting EEROMS partition as EXFAT..." "mkfs.exfat -n EEROMS ${ROMS_PART_NAME} &>/dev/null"
+        StartProgress spinner "Formatting TURBOROMS partition as EXFAT..." "mkfs.exfat -n TURBOROMS ${ROMS_PART_NAME} &>/dev/null"
         ;;
         *)
-        StartProgress spinner "Formatting EEROMS partition as FAT32..." "mkfs.vfat -n EEROMS ${ROMS_PART_NAME} &>/dev/null"
+        StartProgress spinner "Formatting TURBOROMS partition as FAT32..." "mkfs.vfat -n TURBOROMS ${ROMS_PART_NAME} &>/dev/null"
         ;;
       esac   
     elif [ "$ROMS_OMIT_MANUAL" ]; then
-      echo 'WARNING: EEROMS partition is omitted manually even your drive size is >=8GB, YOU KNOW WHAT YOU ARE DOING'
+      echo 'WARNING: TURBOROMS partition is omitted manually even your drive size is >=8GB, YOU KNOW WHAT YOU ARE DOING'
       mount -o rw,remount /flash
-      rm -f /flash/ee_fstype # Mark should be cleaned since the 'no' fstype has no use afterwards
+      rm -f /flash/turborama_fstype # Mark should be cleaned since the 'no' fstype has no use afterwards
     else
-      echo 'WARNING: EEROMS partition is omitted for <8GB drives'
+      echo 'WARNING: TURBOROMS partition is omitted for <8GB drives'
     fi
     StartProgress countdown "Rebooting in 5s...     " 5 "NOW"
   fi

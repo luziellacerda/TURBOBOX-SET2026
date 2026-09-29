@@ -10,13 +10,13 @@ PKG_LICENSE="Non-commercial"
 PKG_SITE="https://github.com/shantigilbert/MBA.mini.Plus-libretro"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec"
+PKG_SECTION="turborama"
 PKG_SHORTDESC="M.B.A = MAME's skeleton + FBA's romsets"
 PKG_LONGDESC="M.B.A-mini from MAME2010-libretro (https://github.com/libretro/mame2010-libretro) after the codes is streamlined, only CPS 1/2, NEOGEO, IREM M92 machines && roms is supported."
 PKG_TOOLCHAIN="make"
 
 if [[ "${ARCH}" == "aarch64" ]]; then
-PKG_PATCH_DIRS="emuelec-aarch64"
+PKG_PATCH_DIRS="turborama-aarch64"
 fi
 
 pre_configure_target() {
@@ -42,9 +42,9 @@ if [[ "${ARCH}" == "arm" ]]; then
 else
 
   if [ "${DEVICE}" = "Amlogic-ng" ]; then
-	PKG_MAKE_OPTS_TARGET="platform=emuelec-n2"
+	PKG_MAKE_OPTS_TARGET="platform=turborama-n2"
   elif [ "${DEVICE}" = "Amlogic-old" ]; then
-	PKG_MAKE_OPTS_TARGET="platform=emuelec"
+	PKG_MAKE_OPTS_TARGET="platform=turborama"
   fi
   
   PKG_MAKE_OPTS_TARGET+=" CC=${CC} LD=${CC}"

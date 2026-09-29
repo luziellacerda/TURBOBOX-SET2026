@@ -15,7 +15,7 @@ PKG_BUILD_FLAGS="lto"
 PKG_CMAKE_OPTS_TARGET=" -DENABLE_LTO=ON \
                         -DCMAKE_EXE_LINKER_FLAGS='-fuse-ld=bfd' \
                         -DCMAKE_SHARED_LINKER_FLAGS='-fuse-ld=bfd' \
-                        -DDISTRIBUTOR='EmuELEC' \
+                        -DDISTRIBUTOR='Turborama' \
                         -DBUILD_SHARED_LIBS=OFF \
                         -DTHREADS_PTHREAD_ARG=OFF \
                         -DENABLE_FBDEV=ON \
@@ -32,7 +32,7 @@ mkdir -p ${INSTALL}/usr/bin
 cp -rf ${PKG_BUILD}/.${TARGET_NAME}/Binaries/dolphin-emu-nogui ${INSTALL}/usr/bin
 cp -rf ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin
 
-mkdir -p ${INSTALL}/usr/config/emuelec/configs/dolphin-emu
-cp -rf ${PKG_BUILD}/Data/Sys/* ${INSTALL}/usr/config/emuelec/configs/dolphin-emu
-cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/emuelec/configs/dolphin-emu
+mkdir -p ${INSTALL}/usr/config/turborama/configs/dolphin-emu
+cp -rf ${PKG_BUILD}/Data/Sys/* ${INSTALL}/usr/config/turborama/configs/dolphin-emu
+cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/turborama/configs/dolphin-emu
 }

@@ -8,13 +8,13 @@
 . /etc/profile
 
 # Configure Mupen64Plus players based on GameControllerDB
-CONFIG_DIR="/storage/.config/emuelec/configs/mupen64plussa"
+CONFIG_DIR="/storage/.config/turborama/configs/mupen64plussa"
 CONFIG="${CONFIG_DIR}/mupen64plus.cfg"
 CONFIG_TMP="/tmp/jc/mupen64.tmp"
 
 source joy_common.sh "mupen64plus"
 
-BTN_H0=$(get_ee_setting mupen_btn_h0)
+BTN_H0=$(get_turborama_setting mupen_btn_h0)
 BTN_H0=${BTN_H0:-0}
 
 declare -A GC_MUPEN64_VALUES=(
@@ -60,7 +60,7 @@ declare -A GC_MUPEN64_BUTTONS=(
     [righty,1]="C Button D"
 )
 
-BTN_SWAP_AB=$(get_ee_setting mupen64_joy_swap_ab)
+BTN_SWAP_AB=$(get_turborama_setting mupen64_joy_swap_ab)
 if [[ "${BTN_SWAP_AB}" == "1" ]]; then
     GC_MUPEN64_BUTTONS[a]="A Button"
     GC_MUPEN64_BUTTONS[b]="B Button"

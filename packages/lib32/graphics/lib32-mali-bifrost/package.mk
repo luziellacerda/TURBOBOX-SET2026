@@ -7,7 +7,7 @@ PKG_VERSION="$(get_pkg_version mali-bifrost)"
 PKG_NEED_UNPACK="$(get_pkg_directory mali-bifrost)"
 PKG_ARCH="aarch64"
 PKG_LICENSE="nonfree"
-PKG_SITE="https://github.com/emuelec/libmali"
+PKG_SITE="https://github.com/luziellacerda/libmali"
 PKG_URL=""
 PKG_DEPENDS_TARGET="lib32-toolchain lib32-libdrm"
 PKG_LONGDESC="The Mali GPU library used in Rockchip Platform for Odroidgo Advance"
@@ -36,7 +36,7 @@ makeinstall_target() {
     local BLOB="lib/arm-linux-gnueabihf/libmali-bifrost-g52-g2p0-gbm.so"
     local LIBDIR=${INSTALL}/usr/lib32/libmali
     mkdir -p ${INSTALL}/etc/profile.d
-    # Add it after the existing LD_LIBRARY_PATH, to make sure /emuelec/libs are read before it
+    # Add it after the existing LD_LIBRARY_PATH, to make sure /turborama/libs are read before it
     echo 'export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib32/libmali"' > ${INSTALL}/etc/profile.d/99-rk-mali-workaround.conf
   fi
 

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-# EmuELEC package for M2000 libretro core (Philips P2000T)
+# Turborama package for M2000 libretro core (Philips P2000T)
 
 PKG_NAME="m2000"
 PKG_VERSION="0.9.4"
@@ -12,7 +12,7 @@ PKG_URL="${PKG_SITE}/archive/refs/tags/v${PKG_VERSION}.tar.gz"
 PKG_SOURCE_DIR="M2000-${PKG_VERSION}"
 
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_SHORTDESC="Philips P2000T (M2000) libretro core"
 PKG_LONGDESC="M2000 is an emulator for the Philips P2000T home computer, here built as a libretro core."
 PKG_TOOLCHAIN="make"

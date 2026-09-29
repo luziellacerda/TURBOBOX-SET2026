@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Zlib
-# LowRes NX (libretro core) for EmuELEC
+# LowRes NX (libretro core) for Turborama
 # Source: https://github.com/timoinutilis/lowres-nx
 
 PKG_NAME="lowresnx"
@@ -9,7 +9,7 @@ PKG_LICENSE="Zlib"
 PKG_SITE="https://github.com/timoinutilis/lowres-nx"
 PKG_URL="https://github.com/timoinutilis/lowres-nx/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_SHORTDESC="LowRes NX (libretro core)"
 PKG_LONGDESC="LowRes NX fantasy console (BASIC) - libretro core."
 PKG_TOOLCHAIN="make"

@@ -21,7 +21,7 @@ fi
 if [[ "${ARCH}" == "arm" ]]; then
 	PKG_PATCH_DIRS="${ARCH}"
 else
-	PKG_PATCH_DIRS="emuelec-aarch64"
+	PKG_PATCH_DIRS="turborama-aarch64"
 fi
 
 
@@ -44,9 +44,9 @@ makeinstall_target() {
     cp ${PKG_DIR}/scripts/*.sh ${INSTALL}/usr/bin
     chmod +x ${INSTALL}/usr/bin/*
 
-    mkdir -p ${INSTALL}/usr/config/emuelec/configs/openbor
-		cp ${PKG_DIR}/config/master.cfg ${INSTALL}/usr/config/emuelec/configs/openbor/master.cfg
+    mkdir -p ${INSTALL}/usr/config/turborama/configs/openbor
+		cp ${PKG_DIR}/config/master.cfg ${INSTALL}/usr/config/turborama/configs/openbor/master.cfg
 
-		mkdir -p ${INSTALL}/usr/config/emuelec/configs/gptokeyb
-		cp -rf ${PKG_DIR}/config/gptokeyb/* ${INSTALL}/usr/config/emuelec/configs/gptokeyb
+		mkdir -p ${INSTALL}/usr/config/turborama/configs/gptokeyb
+		cp -rf ${PKG_DIR}/config/gptokeyb/* ${INSTALL}/usr/config/turborama/configs/gptokeyb
    } 

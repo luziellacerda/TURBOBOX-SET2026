@@ -30,11 +30,11 @@ if [ ! -L "${LOCAL_HOME}" ]; then
     ln -sf "${LOCAL_DATA}" "${LOCAL_HOME}"
 fi
 
-PLAYER=$(get_ee_setting global.netplay.nickname)
+PLAYER=$(get_turborama_setting global.netplay.nickname)
 [ -z "${PLAYER}" ] && PLAYER="PLAYER"
 PLAYER="${PLAYER// /_}"
 
-#AUTOGP=$(get_ee_setting flycast_auto_gamepad)
+#AUTOGP=$(get_turborama_setting flycast_auto_gamepad)
 #if [[ "${AUTOGP}" != "0" ]]; then
 #    mkdir -p "${MAP}"
 #    set_flycastdojo_joy.sh

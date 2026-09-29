@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-# Copyright (C) 2024-present Team EmuELEC (https://emuelec.org)
+# Copyright (C) 2024-present Team EmuELEC (https://github.com/EmuELEC/EmuELEC)
 
 PKG_NAME="beetle-saturn"
 PKG_VERSION="ccba5265f60f8e64a1984c9d14d383606193ea6a"

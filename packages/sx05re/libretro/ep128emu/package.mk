@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-# EmuELEC package for ep128emu libretro core
+# Turborama package for ep128emu libretro core
 
 PKG_NAME="ep128emu"
 PKG_VERSION="a9e857e70466f95cfd54b4e5f2b30453b581e822"
@@ -9,7 +9,7 @@ PKG_SITE="https://github.com/libretro/ep128emu-core"
 PKG_URL="${PKG_SITE}.git"
 
 PKG_ARCH="any"
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_SHORTDESC="Enterprise 64/128 (ep128emu) libretro core"
 PKG_LONGDESC="Libretro core version of ep128emu, emulating Enterprise 64/128, Videoton TVC, Amstrad CPC and ZX Spectrum home computers."

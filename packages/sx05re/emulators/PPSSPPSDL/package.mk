@@ -70,6 +70,6 @@ makeinstall_target() {
 for dir in Cheats PPSSPP_STATE SAVEDATA TEXTURES; do
 		ln -sf "/storage/roms/savestates/PPSSPPSDL/PSP/${dir}" "${INSTALL}/usr/config/ppsspp/PSP/${dir}"
 done
-    mkdir -p "${INSTALL}/usr/config/emuelec/configs"
-    ln -sf "/storage/.config/ppsspp" "${INSTALL}/usr/config/emuelec/configs/ppsspp"
+    mkdir -p "${INSTALL}/usr/config/turborama/configs"
+    ln -sf "/storage/.config/ppsspp" "${INSTALL}/usr/config/turborama/configs/ppsspp"
 } 

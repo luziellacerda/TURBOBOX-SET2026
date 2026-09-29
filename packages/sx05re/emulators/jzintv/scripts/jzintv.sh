@@ -43,7 +43,7 @@ case "$IN" in
 esac
 
 # Optional keyboard hack
-KBD="/emuelec/configs/jzintv_keyb.hack"
+KBD="/turborama/configs/jzintv_keyb.hack"
 [ -f "$KBD" ] && KBD_OPT="--kbdhackfile $KBD" || KBD_OPT=""
 
 exec jzintv -f1 -z "$RES" -p /storage/roms/bios/ "$ROM" $KBD_OPT

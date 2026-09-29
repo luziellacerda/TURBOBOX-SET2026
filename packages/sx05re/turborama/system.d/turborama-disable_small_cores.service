@@ -1,0 +1,13 @@
+[Unit]
+Description=turborama disable small cores service
+Before=emustation.service
+After=graphical.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/turborama-utils small-cores disable
+RemainAfterExit=true
+ExecStop=/usr/bin/turborama-utils small-cores enable
+
+[Install]
+WantedBy=turborama.target

@@ -31,7 +31,7 @@ makeinstall_target() {
 
   install -m 0755 ${PKG_DIR}/scripts/startopenmsx.sh ${INSTALL}/usr/bin/
 
-  mkdir -p ${INSTALL}/usr/config/emuelec/configs/openmsx/gptk
+  mkdir -p ${INSTALL}/usr/config/turborama/configs/openmsx/gptk
   cp ${PKG_DIR}/config/openmsx.gptk \
-    ${INSTALL}/usr/config/emuelec/configs/openmsx/gptk/
+    ${INSTALL}/usr/config/turborama/configs/openmsx/gptk/
 }

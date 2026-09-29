@@ -3,13 +3,13 @@
 
 ROM="$1"
 
-CONFIG_DIR="/storage/.config/emuelec/configs/oricutron"
-DEFAULT_DIR="/usr/config/emuelec/configs/oricutron"
+CONFIG_DIR="/storage/.config/turborama/configs/oricutron"
+DEFAULT_DIR="/usr/config/turborama/configs/oricutron"
 
 # Default GPTK
-GPTK_DEFAULT="/storage/.config/emuelec/configs/gptokeyb/oricutron.gptk"
+GPTK_DEFAULT="/storage/.config/turborama/configs/gptokeyb/oricutron.gptk"
 # Per-ROM GPTK directory (optional)
-GPTK_PERROM_DIR="/storage/.config/emuelec/configs/gptokeyb/oric"
+GPTK_PERROM_DIR="/storage/.config/turborama/configs/gptokeyb/oric"
 
 mkdir -p "${CONFIG_DIR}"
 mkdir -p "${GPTK_PERROM_DIR}"

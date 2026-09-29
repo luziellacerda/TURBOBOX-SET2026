@@ -40,14 +40,14 @@ pre_configure_target() {
   CPPFLAGS="${CPPFLAGS} -DLINUX -DEGL_API_FB"
   
   sed -i "s|BOARD :=.*|BOARD = N2|g" Makefile
-  sed -i "s|odroid64|emuelec64|g" Makefile
+  sed -i "s|odroid64|turborama64|g" Makefile
   
    case ${DEVICE} in
     Amlogic-ng|Amlogic-no|Amlogic-ogu)
     if [ ${ARCH} == "arm" ]; then
 		PKG_MAKE_OPTS_TARGET="platform=odroid BOARD=c2"
       else
-		PKG_MAKE_OPTS_TARGET="platform=emuelec64 BOARD=N2"
+		PKG_MAKE_OPTS_TARGET="platform=turborama64 BOARD=N2"
       fi
     ;;
     Amlogic-old)

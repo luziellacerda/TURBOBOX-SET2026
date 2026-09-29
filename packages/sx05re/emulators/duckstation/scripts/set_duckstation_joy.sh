@@ -13,7 +13,7 @@
 
 source joy_common.sh "duckstation"
 
-OUTPUT_FILE="/emuelec/configs/duckstation/settings.ini"
+OUTPUT_FILE="/turborama/configs/duckstation/settings.ini"
 LAST_GUIDE_BUTTON=""
 
 # SDL_GameControllerButton enum values
@@ -134,7 +134,7 @@ generate_config() {
         fi
     done
 
-    RUMBLE=$(get_ee_setting ee_rumble_strength)
+    RUMBLE=$(get_turborama_setting turborama_rumble_strength)
     [[ -z "${RUMBLE}" ]] && RUMBLE=0
     [[ "${RUMBLE}" -gt "0" ]] && echo "Rumble = Controller${controller_num}"
 }

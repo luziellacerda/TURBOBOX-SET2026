@@ -13,7 +13,7 @@ PKG_LONGDESC="Vircon32 32-bit Virtual Console"
 pre_configure_target() {
   PKG_CMAKE_OPTS_TARGET+=" \
   -DENABLE_OPENGLES2=1 \
-  -DPLATFORM=EMUELEC \
+  -DPLATFORM=TURBORAMA \
   -DOPENGL_INCLUDE_DIR=${SYSROOT_PREFIX}/usr/include \
   -DCMAKE_BUILD_TYPE=Release"
 }

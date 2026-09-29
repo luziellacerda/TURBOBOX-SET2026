@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 PKG_NAME="touchhle"
 PKG_VERSION="f8f21296b1bf2e5112db5e2ee36a683b7610d1ff"
-PKG_SITE="https://github.com/worstcase-scenario/EE_touchHLE"
-PKG_GIT_CLONE_BRANCH="emuelec-integration"
+PKG_SITE="https://github.com/luziellacerda/turborama-touchHLE"
+PKG_GIT_CLONE_BRANCH="turborama-integration"
 PKG_URL="${PKG_SITE}.git"
 PKG_GIT_SUBMODULES="yes"
 PKG_LICENSE="MPLv2"

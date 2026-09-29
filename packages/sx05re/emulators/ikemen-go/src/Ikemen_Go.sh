@@ -11,13 +11,13 @@ ALSA_CONF=/storage/.config/asound.conf
     mv ${ALSA_CONF} ${ALSA_CONF}.tmp
     cp ${IKEMEN_ALSA_CONF} ${ALSA_CONF}
 
-LOGSDIR="/emuelec/logs"
+LOGSDIR="/turborama/logs"
 LOGFILE="$LOGSDIR/ikemen.log"
 SHARED="/usr/share/ikemen_go"
 CONFIGDIRHOME="/tmp/ikemen"
 
 # Language log Configuration by DiegroSan
-config_file="/storage/.config/emuelec/configs/emuelec.conf"
+config_file="/storage/.config/turborama/configs/turborama.conf"
 
 language_value=$(grep '^system.language=' "$config_file" | cut -d'=' -f2)
 
@@ -168,7 +168,7 @@ log "$MESSAGE_005 $IKEMEN"
 # Create symbolic links
 ln -sf "$IKEMEN"/* "$CONFIGDIR/"
 
-GAMEMAP=$(get_ee_setting ee_ikemen.enabled)
+GAMEMAP=$(get_turborama_setting turborama_ikemen.enabled)
 if [[ ${GAMEMAP} != 0 ]]; then
 gamepadmap "${IKEMEN}/save/config.json"  2>/dev/null || log "$MESSAGE_010"
 fi

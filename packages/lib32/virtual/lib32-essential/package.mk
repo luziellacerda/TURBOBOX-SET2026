@@ -5,7 +5,7 @@ PKG_NAME="lib32-essential"
 PKG_VERSION=""
 PKG_ARCH="aarch64"
 PKG_LICENSE="GPL"
-PKG_SITE="https://emuelec.org"
+PKG_SITE="https://github.com/luziellacerda/TURBOBOX-SET2026"
 PKG_DEPENDS_TARGET="lib32-toolchain lib32-binutils lib32-gcc lib32-ldconfig lib32-nold"
 # lib32-binutils adds multilib support (/etc/ld.so.conf, and a link under /usr/lib to point to the ld-linux-armhf.so.3 under /usr/lib32)
 # lib32-gcc adds stdc++ library, and lib32 config (/etc/ld.so.conf.d/lib32-gcc.conf, so /usr/lib32 will be searched by ld)

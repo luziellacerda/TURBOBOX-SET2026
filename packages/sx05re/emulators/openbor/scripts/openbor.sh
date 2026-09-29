@@ -11,7 +11,7 @@ OB=${2}
 pakname=$(basename "${1}")
 pakname="${pakname%.*}"
 
-CONFIGDIR="/emuelec/configs/openbor"
+CONFIGDIR="/turborama/configs/openbor"
 PAKS="${CONFIGDIR}/Paks"
 SAVES="${CONFIGDIR}/Saves"
 

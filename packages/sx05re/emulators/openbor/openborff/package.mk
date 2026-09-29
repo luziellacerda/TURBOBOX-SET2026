@@ -20,7 +20,7 @@ fi
 if [[ "${ARCH}" == "arm" ]]; then
 	PKG_PATCH_DIRS="${ARCH}"
 else
-	PKG_PATCH_DIRS="emuelec-aarch64"
+	PKG_PATCH_DIRS="turborama-aarch64"
 fi
 
 pre_configure_target() {
@@ -39,6 +39,6 @@ makeinstall_target() {
   mkdir -p ${INSTALL}/usr/bin
     cp `find . -name "OpenBOR.elf" | xargs echo` ${INSTALL}/usr/bin/OpenBORff
     chmod +x ${INSTALL}/usr/bin/*
-    mkdir -p ${INSTALL}/usr/config/emuelec/configs/openbor
-	cp ${PKG_DIR}/config/master.cfg ${INSTALL}/usr/config/emuelec/configs/openbor/masterff.cfg
+    mkdir -p ${INSTALL}/usr/config/turborama/configs/openbor
+	cp ${PKG_DIR}/config/master.cfg ${INSTALL}/usr/config/turborama/configs/openbor/masterff.cfg
    } 

@@ -11,10 +11,10 @@ EKA_CONFIG_DIR="/storage/.config/eka2l1"
 EKA_DATA_DIR="${EKA_CONFIG_DIR}/data"
 EKA_DRIVES_DIR="${EKA_DATA_DIR}/drives"
 EKA_E_DIR="${EKA_DRIVES_DIR}/e"
-EKA_GPTK="/storage/.config/emuelec/configs/eka2l1/gptk/eka.gptk"
-EKA_LOG="/emuelec/logs/eka2l1.log"
-EKA_DEVICE_CACHE="/storage/.config/emuelec/configs/eka2l1/device_cache"
-DIALOG_GPTK="/storage/.config/emuelec/configs/eka2l1/gptk/dialog.gptk"
+EKA_GPTK="/storage/.config/turborama/configs/eka2l1/gptk/eka.gptk"
+EKA_LOG="/turborama/logs/eka2l1.log"
+EKA_DEVICE_CACHE="/storage/.config/turborama/configs/eka2l1/device_cache"
+DIALOG_GPTK="/storage/.config/turborama/configs/eka2l1/gptk/dialog.gptk"
 SELECTED_DEVICE_FILE="/tmp/eka_selected_device"
 
 EKA_DEVICE_NGAGE1="${EKA_DEVICE_NGAGE1:-NEM-4}"
@@ -31,7 +31,7 @@ CLEANUP_DONE=0
 
 mkdir -p "$(dirname "${EKA_LOG}")"
 mkdir -p "$(dirname "${EKA_DEVICE_CACHE}")"
-echo "EmuELEC eka2l1 Log" > "${EKA_LOG}"
+echo "Turborama eka2l1 Log" > "${EKA_LOG}"
 
 log() { echo "$*" >> "${EKA_LOG}"; }
 
@@ -132,9 +132,9 @@ run_dialog_script() {
   kill -STOP $(pidof emulationstation) 2>/dev/null
   sleep 0.5
   dd if=/dev/zero of=/dev/fb0 bs=1M 2>/dev/null || true
-  ee_console enable
+  turborama_console enable
   fbterm "${tmpscript}" -s 24 < /dev/tty1
-  ee_console disable
+  turborama_console disable
   kill -CONT $(pidof emulationstation) 2>/dev/null
   killall -9 gptokeyb 2>/dev/null
   gptokeyb 1 eka2l1_sdl2 -c "${EKA_GPTK}" &

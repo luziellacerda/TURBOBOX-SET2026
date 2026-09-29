@@ -709,7 +709,7 @@ mount_storage() {
   fi
 }
 
-# EmuELEC specific
+# Turborama specific
 mount_roms() {
   if /usr/bin/busybox mountpoint -q /storage ; then
     progress "Mounting roms"
@@ -718,15 +718,15 @@ mount_roms() {
     fi
     /usr/bin/busybox mkdir -p /storage/roms > /dev/null 2>&1
 
-    # Get EEROMS filetype
+    # Get TURBOROMS filetype
     ROM_FS_TYPE="vfat"
 
-    if [ -e "/flash/ee_fstype" ]; then
-      EE_FS_TYPE=$(cat "/flash/ee_fstype")
+    if [ -e "/flash/turborama_fstype" ]; then
+      TURBORAMA_FS_TYPE=$(cat "/flash/turborama_fstype")
       
-      case $EE_FS_TYPE in
+      case $TURBORAMA_FS_TYPE in
         "ntfs"|"ext4"|"exfat")
-          ROM_FS_TYPE=${EE_FS_TYPE}
+          ROM_FS_TYPE=${TURBORAMA_FS_TYPE}
         ;;
         *)
           # Failsafe
@@ -736,11 +736,11 @@ mount_roms() {
     fi
       
     if [ "${ROM_FS_TYPE}" == "ntfs" ]; then 
-      NTFSMOUNT=$(/sysroot/usr/sbin/blkid --label EEROMS)
+      NTFSMOUNT=$(/sysroot/usr/sbin/blkid --label TURBOROMS)
       insmod /sysroot/usr/lib/kernel-overlays/base/lib/modules/$(uname -r)/kernel/fs/fuse/fuse.ko > /dev/null 2>&1
       LD_LIBRARY_PATH=/sysroot/usr/lib /sysroot/usr/bin/ntfs-3g ${NTFSMOUNT} /storage/roms > /dev/null 2>&1
     else
-      mount -t ${ROM_FS_TYPE} "LABEL=EEROMS" /storage/roms > /dev/null 2>&1
+      mount -t ${ROM_FS_TYPE} "LABEL=TURBOROMS" /storage/roms > /dev/null 2>&1
     fi
 
     # If mounting roms partition was succesful, we bind mount the update folder to use the third partition

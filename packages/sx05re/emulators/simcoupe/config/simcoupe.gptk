@@ -6,13 +6,13 @@
 # 
 # Then SAVE this file under the game's name. For Example: Prince of Persia.gptk
 #
-# The correct filepath for the game-gptk file is: /storage/.config/emuelec/configs/gptokeyb/simcoupe
+# The correct filepath for the game-gptk file is: /storage/.config/turborama/configs/gptokeyb/simcoupe
 #
-# For example: /storage/.config/emuelec/configs/gptokeyb/simcoupe/Prince of Persia.gptk
+# For example: /storage/.config/turborama/configs/gptokeyb/simcoupe/Prince of Persia.gptk
 #
 # Simcoupe will automatically load the respective gptk file when starting the game. 
 #
-# If no gptk file is found, the emulator will always use "simcoupe.gptk" in /storage/.config/emuelec/configs/gptokeyb/
+# If no gptk file is found, the emulator will always use "simcoupe.gptk" in /storage/.config/turborama/configs/gptokeyb/
 #----------------------------------------------------------------------------------------------------------------------------
 back = esc
 start = enter

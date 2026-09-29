@@ -183,10 +183,10 @@ makeinstall_target() {
   echo "playlist_entry_rename = \"false\"" >> ${INSTALL}/etc/retroarch.cfg
   echo "playlist_entry_remove = \"false\"" >> ${INSTALL}/etc/retroarch.cfg
 
-  #emuelec
+  #turborama
   sed -i -e "s/.*core_updater_buildbot_url =.*/core_updater_buildbot_url = \"http:\/\/dontupdatecores\"/" ${INSTALL}/etc/retroarch.cfg
   sed -i -e "s/# input_hotkey_block_delay = \"5\"/input_hotkey_block_delay = \"5\"/" ${INSTALL}/etc/retroarch.cfg
-  sed -i -e "s/# menu_show_core_updater = true/\# DONT UPDATE CORES IT WILL BREAK EMUELEC! \n menu_show_core_updater = false/" ${INSTALL}/etc/retroarch.cfg
+  sed -i -e "s/# menu_show_core_updater = true/\# DONT UPDATE CORES IT WILL BREAK TURBORAMA! \n menu_show_core_updater = false/" ${INSTALL}/etc/retroarch.cfg
   sed -i -e "s/# menu_show_online_updater = true/menu_show_online_updater = true/" ${INSTALL}/etc/retroarch.cfg
   sed -i -e "s/# input_overlay_opacity = 1.0/input_overlay_opacity = 0.15/" ${INSTALL}/etc/retroarch.cfg
   sed -i -e "s/# audio_volume = 0.0/audio_volume = "0.000000"/" ${INSTALL}/etc/retroarch.cfg
@@ -218,8 +218,8 @@ fi
   mkdir -p ${INSTALL}/usr/config/retroarch/
   mv ${INSTALL}/etc/retroarch.cfg ${INSTALL}/usr/config/retroarch/
 
-  mkdir -p "${INSTALL}/usr/config/emuelec/configs"
-  ln -sf "/storage/.config/retroarch" "${INSTALL}/usr/config/emuelec/configs/retroarch"
+  mkdir -p "${INSTALL}/usr/config/turborama/configs"
+  ln -sf "/storage/.config/retroarch" "${INSTALL}/usr/config/turborama/configs/retroarch"
 
 }
 

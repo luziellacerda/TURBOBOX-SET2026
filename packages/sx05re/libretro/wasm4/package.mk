@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-# EmuELEC / LibreELEC package for WASM-4 libretro core
+# Turborama / LibreELEC package for WASM-4 libretro core
 
 PKG_NAME="wasm4"
 PKG_VERSION="68cbe429fcbab3e80537282d2c21566f5ea216ea"

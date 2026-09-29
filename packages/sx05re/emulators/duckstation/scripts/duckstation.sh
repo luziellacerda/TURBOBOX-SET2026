@@ -6,13 +6,13 @@
 . /etc/profile
 
 LOCAL_CONFIG="/storage/.local/share"
-CONFIG_DIR="/emuelec/configs/duckstation"
+CONFIG_DIR="/turborama/configs/duckstation"
 
 mkdir -p "${LOCAL_CONFIG}"
 
 if [ ! -d "${CONFIG_DIR}" ]; then
     mkdir -p "${CONFIG_DIR}"
-	cp -rf "/usr/config/emuelec/configs/duckstation/*" "${CONFIG_DIR}"
+	cp -rf "/usr/config/turborama/configs/duckstation/*" "${CONFIG_DIR}"
 fi
 
 # If texture folder exists and not symlink, remove it and create symlink to textures folder in /storage/roms/psx/textures to enable texture replacement
@@ -26,7 +26,7 @@ if [ ! -L "${LOCAL_CONFIG}/duckstation" ]; then
     ln -sf "${CONFIG_DIR}" "${LOCAL_CONFIG}"
 fi
 
-AUTOGP=$(get_ee_setting duckstation_auto_gamepad)
+AUTOGP=$(get_turborama_setting duckstation_auto_gamepad)
 if [[ "${AUTOGP}" == "1" ]]; then
 	set_duckstation_joy.sh
 fi

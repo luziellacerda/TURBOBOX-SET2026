@@ -7,7 +7,7 @@
 ROM="$1"
 ROMNAME="${ROM##*/}"; ROMBASE="${ROMNAME%.*}"
 
-export LD_LIBRARY_PATH="/usr/config/emuelec/configs/openmsx/libs:${LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH="/usr/config/turborama/configs/openmsx/libs:${LD_LIBRARY_PATH}"
 export OPENMSX_HOME="/storage/.openMSX"
 export LIBGL_VSYNC=0
 export LIBGL_NOINTOVLHACK=1
@@ -19,10 +19,10 @@ mkdir -p /storage/.openMSX/share
   ln -sf /storage/roms/bios/msx /storage/.openMSX/share/systemroms
 
 # gptk
-GPTK_DIR="/storage/.config/emuelec/configs/openmsx/gptk"
+GPTK_DIR="/storage/.config/turborama/configs/openmsx/gptk"
 GPTK_LD="${GPTK_DIR}/openmsx-ld.gptk"
 [ ! -f "${GPTK_LD}" ] && mkdir -p "${GPTK_DIR}" && \
-  cp /usr/config/emuelec/configs/openmsx/gptk/openmsx-ld.gptk "${GPTK_LD}"
+  cp /usr/config/turborama/configs/openmsx/gptk/openmsx-ld.gptk "${GPTK_LD}"
 [ -f "${GPTK_DIR}/${ROMBASE}.gptk" ] && GPTK_CONFIG="${GPTK_DIR}/${ROMBASE}.gptk" || GPTK_CONFIG="${GPTK_LD}"
 gptokeyb 1 openmsx-ld -c "${GPTK_CONFIG}" &
 
@@ -35,7 +35,7 @@ pkill -9 mpv 2>/dev/null
 killall -STOP emulationstation 2>/dev/null
 killall -STOP es 2>/dev/null
 
-fbfix $(emuelec-utils getmainfb) 2>/dev/null
+fbfix $(turborama-utils getmainfb) 2>/dev/null
 echo 0 > /sys/class/graphics/fb0/blank 2>/dev/null
 
 sync
@@ -55,4 +55,4 @@ sleep 0.3
 
 killall -9 gptokeyb 2>/dev/null
 killall -CONT emulationstation 2>/dev/null
-fbfix $(emuelec-utils getmainfb) 2>/dev/null
+fbfix $(turborama-utils getmainfb) 2>/dev/null

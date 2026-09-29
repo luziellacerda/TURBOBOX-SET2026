@@ -1,0 +1,13 @@
+[Unit]
+Description=turborama user autostart script
+Before=emustation.service
+After=graphical.target
+
+[Service]
+Type=oneshot
+Environment=HOME=/storage
+ExecStart=-/bin/bash -c ". /etc/profile; exec /bin/bash /usr/bin/turborama_autostart.sh"
+RemainAfterExit=yes
+
+[Install]
+WantedBy=turborama.target

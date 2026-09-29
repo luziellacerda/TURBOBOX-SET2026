@@ -14,11 +14,11 @@ AMIBERRY_DIR=/storage/.config/${AMIBERRY_EXE}
 AMIBERRY_CONFIG_DIR="${AMIBERRY_DIR}/conf"
 AMIBERRY_TMP_DIR=/tmp/emulation/${AMIBERRY_EXE}
 AMIBERRY_TMP_CONFIG="${AMIBERRY_TMP_DIR}/.${AMIBERRY_EXE}_conf.uae"
-AMIBERRY_LOG=/emuelec/logs/${AMIBERRY_EXE}.log
+AMIBERRY_LOG=/turborama/logs/${AMIBERRY_EXE}.log
 MAX_DRIVES=4
 i=0
 
-echo "EmuELEC ${AMIBERRY_EXE} Log" > "${AMIBERRY_LOG}"
+echo "Turborama ${AMIBERRY_EXE} Log" > "${AMIBERRY_LOG}"
 echo "Trying to boot this game: ${TARGET_FILE}" >> "${AMIBERRY_LOG}"
 
 # Force SDL audio backend

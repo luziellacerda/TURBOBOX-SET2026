@@ -10,7 +10,7 @@ PKG_SITE="https://github.com/thieman/exa-rs"
 PKG_URL="${PKG_SITE}.git"
 
 PKG_DEPENDS_TARGET="toolchain cargo:host" 
-PKG_SECTION="emuelec/libretro"
+PKG_SECTION="turborama/libretro"
 PKG_SHORTDESC="exa-rs libretro core (TEC Redshift / EXAPUNKS)"
 PKG_LONGDESC="Libretro core for the TEC Redshift, the fictional handheld from Zachtronics' EXAPUNKS."
 PKG_TOOLCHAIN="manual"

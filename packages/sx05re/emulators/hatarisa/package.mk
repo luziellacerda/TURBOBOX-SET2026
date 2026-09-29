@@ -42,7 +42,7 @@ makeinstall_target() {
   cp src/hatari ${INSTALL}/usr/bin
   cp -R ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin/
 
-  mkdir -p "${INSTALL}/usr/config/emuelec/configs"
-  ln -sf "/storage/.config/hatari" "${INSTALL}/usr/config/emuelec/configs/hatari"
+  mkdir -p "${INSTALL}/usr/config/turborama/configs"
+  ln -sf "/storage/.config/hatari" "${INSTALL}/usr/config/turborama/configs/hatari"
 
 }

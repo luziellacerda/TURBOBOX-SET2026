@@ -34,9 +34,9 @@ PKG_TOOLCHAIN="make"
 
 pre_configure_target() {
 if [ "${ARCH}" == "arm" ]; then
-PKG_MAKE_OPTS_TARGET=" -C ${PKG_BUILD}/src/os/libretro -f Makefile platform=emuelec"
+PKG_MAKE_OPTS_TARGET=" -C ${PKG_BUILD}/src/os/libretro -f Makefile platform=turborama"
 else
-PKG_MAKE_OPTS_TARGET=" -C ${PKG_BUILD}/src/os/libretro -f Makefile platform=emuelec-arm64"
+PKG_MAKE_OPTS_TARGET=" -C ${PKG_BUILD}/src/os/libretro -f Makefile platform=turborama-arm64"
 fi
 }
 

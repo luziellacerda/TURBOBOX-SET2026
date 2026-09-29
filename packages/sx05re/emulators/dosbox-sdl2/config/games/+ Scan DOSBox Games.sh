@@ -4,7 +4,7 @@
 # Copyright (C) 2019-present Shanti Gilbert (https://github.com/shantigilbert)
 # Copyright (C) 2020-present Sylvia van Os (https://github.com/TheLastProject)
 
-EE_DEVICE=$(cat /ee_arch)
+TURBORAMA_DEVICE=$(cat /turborama_arch)
 
 source /usr/bin/env.sh
 rp_registerAllModules
@@ -16,7 +16,7 @@ function restart_confirm() {
         systemctl restart emustation
     fi
 
-    if [ "${EE_DEVICE}" == "OdroidGoAdvance" ]; then
+    if [ "${TURBORAMA_DEVICE}" == "OdroidGoAdvance" ]; then
         killall kmscon
     fi
 }

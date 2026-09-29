@@ -7,13 +7,7 @@ assignees: ''
 
 ---
 
-# BEFORE YOU OPEN AN ISSUE MAKE SURE IT IS NOT ALREADY RESOLVED IN THE WIKI https://github.com/EmuELEC/EmuELEC/wiki
-
-# MAKE SURE YOUR DEVICE IS A [SUPPORTED DEVICE](https://github.com/EmuELEC/EmuELEC/wiki/Supported-Devices)  
-
-# PLEASE DO NOT POST GENERAL HELP QUESTIONS! EITHER USE THE FORUM (https://emuelec.org) OR USE DISCORD FOR THAT (https://discord.gg/cbgtJTu), THIS IS ONLY FOR BUG/ISSUES REPORTING!
-
-# DELETE EVERYTHING ABOVE THIS LINE (INCLUDING THIS LINE) BEFORE SUBMITTING TO MAKE SURE YOU'VE READ THIS!
+Check the [existing Turborama issues](https://github.com/luziellacerda/TURBOBOX-SET2026/issues) before opening a report. Include the exact image filename, device model and DTB used. State whether this is a fresh installation or an update.
 
 
 **Describe the bug**
@@ -32,7 +26,7 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**EmuELEC version:**
+**Turborama version:**
  - Version [e.g. 22]
 
 **Device (please complete the following information):**

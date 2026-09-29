@@ -8,7 +8,7 @@ import subprocess
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-LEGACY = re.compile(r'emu' r'elec|emu' r'eelec|\bee' r'roms\b|\bee' r'mount\b|\bee' r'_\w*|\bget_' r'ee' r'_setting\b|\bset_' r'ee' r'_setting\b|\bee' r's\b', re.I)
+LEGACY = re.compile(r'emu' r'elec|emu' r'eelec|\bee' r'roms\b|\bee' r'mount\b|\bee' r'version\b|\bee' r'_\w*|\bget_' r'ee' r'_setting\b|\bset_' r'ee' r'_setting\b|\bee' r's\b', re.I)
 
 
 class IdentityTests(unittest.TestCase):

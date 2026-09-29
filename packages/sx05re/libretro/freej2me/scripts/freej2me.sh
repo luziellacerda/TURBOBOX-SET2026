@@ -8,7 +8,7 @@
 # Lets check if java is installed and up to date, called from profile
 install_java
 
-if [[ -f "/storage/roms/bios/jdk/eeversion" ]]; then
+if [[ -f "/storage/roms/bios/jdk/turborama-version" ]]; then
     cp -rf /usr/lib/libretro/freej2me-lr.jar ${HOME}/roms/bios
 else
     exit 1

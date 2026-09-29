@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 import zlib
 
 
-LEGACY = re.compile(rb'emu' rb'elec|\bee' rb'mount\b|\bee' rb'roms\b|\bee' rb'_utils\b', re.I)
+LEGACY = re.compile(rb'emu' rb'elec|\bee' rb'mount\b|\bee' rb'roms\b|\bee' rb'version\b|\bee' rb'_utils\b', re.I)
 
 
 def audit_identity(root, build_root=None):

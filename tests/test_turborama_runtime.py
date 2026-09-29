@@ -136,6 +136,15 @@ class JoystickTests(unittest.TestCase):
         self.assertEqual(calls, [b'\x1b', b'[', b'A'])
 
 
+class JavaTests(unittest.TestCase):
+    def test_installer_and_launcher_use_same_version_marker(self):
+        profile = (RUNTIME / 'profile.d/99-turborama.conf').read_text()
+        launcher = (ROOT / 'packages/sx05re/libretro/freej2me/scripts/freej2me.sh').read_text()
+        self.assertIn('cat ${JDKDEST}/turborama-version', profile)
+        self.assertIn('> "${JDKDEST}/turborama-version"', profile)
+        self.assertIn('/storage/roms/bios/jdk/turborama-version', launcher)
+
+
 class BootTests(unittest.TestCase):
     def test_autostart_does_not_wait_for_dependent_frontend(self):
         unit = (RUNTIME / 'system.d/turborama-autostart.service').read_text()

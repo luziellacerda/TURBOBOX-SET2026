@@ -10,6 +10,7 @@ import re
 import subprocess
 import struct
 import xml.etree.ElementTree as ET
+import zlib
 
 
 LEGACY = re.compile(rb'emu' rb'elec|\bee' rb'mount\b|\bee' rb'roms\b|\bee' rb'_utils\b', re.I)
@@ -87,6 +88,22 @@ def audit_disk(path):
         elif superblock[120:136].rstrip(b'\0') != b'STORAGE':
             errors.append('System data partition is not labeled STORAGE')
     return errors
+
+
+def audit_boot_script(path):
+    """Check a generated legacy U-Boot script header and payload without running it."""
+    if not path.is_file():
+        return [f'Missing boot script: {path.name}']
+    data = path.read_bytes()
+    if len(data) < 64:
+        return [f'Truncated boot script: {path.name}']
+    magic, hcrc, _, size, _, _, dcrc, _, _, kind, compression, _ = struct.unpack('>7I4B32s', data[:64])
+    if magic != 0x27051956 or kind != 6 or compression != 0:
+        return [f'Invalid U-Boot script header: {path.name}']
+    header = data[:4] + b'\0' * 4 + data[8:64]
+    if hcrc != zlib.crc32(header) or size != len(data) - 64 or dcrc != zlib.crc32(data[64:]):
+        return [f'Boot script checksum/size mismatch: {path.name}']
+    return []
 
 
 def image_path(root, absolute):
@@ -179,6 +196,12 @@ def audit(root, initramfs=None):
             errors.append(f'Invalid frontend systems XML: {error}')
     require('publish_update' in read('/usr/bin/updatecheck.sh'), 'Missing shared update verifier')
     require('stageupdate' in read('/usr/bin/batocera/turborama-upgrade'), 'Frontend bypasses shared updater')
+    for script in ('Generic_cfgload', 'aml_autoscript'):
+        path = image_path(root, '/usr/share/bootloader/' + script)
+        errors.extend(audit_boot_script(path))
+        if script == 'Generic_cfgload' and path.is_file():
+            require(b'boot=LABEL=TURBORAMA disk=LABEL=STORAGE' in path.read_bytes(),
+                    'Generated Generic boot script selects incorrect partitions')
     if initramfs:
         init = image_path(initramfs, '/init')
         require(init.is_file() and 'LABEL=TURBOROMS' in init.read_text(), 'Initramfs has the wrong ROM partition label')

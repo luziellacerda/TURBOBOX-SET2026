@@ -5,6 +5,7 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
+import zlib
 
 MODULE = Path(__file__).resolve().parents[1] / 'tools/audit-turborama-rootfs.py'
 SPEC = importlib.util.spec_from_file_location('rootfs_audit', MODULE)
@@ -13,6 +14,23 @@ SPEC.loader.exec_module(AUDIT)
 
 
 class RootfsTests(unittest.TestCase):
+    def test_generated_boot_script_integrity(self):
+        payload = b'\0\0\0\x05\0\0\0\0boot\n'
+        header = bytearray(struct.pack('>7I4B32s', 0x27051956, 0, 0, len(payload), 0, 0,
+                                       zlib.crc32(payload), 5, 2, 6, 0, b'Turborama'))
+        struct.pack_into('>I', header, 4, zlib.crc32(header))
+        with tempfile.TemporaryDirectory(prefix='turborama-boot-test-') as tmp:
+            path = Path(tmp) / 'cfgload'
+            path.write_bytes(header + payload)
+            self.assertEqual(AUDIT.audit_boot_script(path), [])
+            path.write_bytes(header + payload + b'corrupt')
+            self.assertTrue(AUDIT.audit_boot_script(path))
+            header[8] ^= 1
+            path.write_bytes(header + payload)
+            self.assertTrue(AUDIT.audit_boot_script(path))
+            path.write_bytes(b'bad')
+            self.assertTrue(AUDIT.audit_boot_script(path))
+
     def test_identity_distinguishes_build_paths_from_runtime_paths(self):
         legacy = b'Emu' b'ELEC'
         with tempfile.TemporaryDirectory(prefix='turborama-identity-test-') as tmp:

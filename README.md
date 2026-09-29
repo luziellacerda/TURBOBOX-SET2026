@@ -34,6 +34,14 @@ python3 -m unittest discover -s tests -p 'test_turborama_*.py' -v
 
 Os testes verificam configurações, versões, identidade de dispositivo, checksum de atualização, tratamento de teclas, contratos de inicialização e referências de identidade nos arquivos rastreados. A inspeção de texto preserva os créditos originais e não substitui a revisão de imagens e binários nem o teste de boot no hardware.
 
+Para uma imagem `SYSTEM` extraída, a auditoria estrutural é somente de leitura e não executa os binários ARM:
+
+```bash
+python3 tools/audit-turborama-rootfs.py /caminho/para/system-extraido --initramfs /caminho/para/initramfs-extraido
+```
+
+Essa auditoria confere identidade, serviços habilitados, carregadores ELF, configurações e integração do atualizador. O argumento `--initramfs` é opcional.
+
 ## Licença e atribuições
 
 O projeto é distribuído sob as licenças presentes no diretório `licenses`. Componentes de terceiros mantêm suas licenças e atribuições originais nos respectivos arquivos-fonte e repositórios derivados.

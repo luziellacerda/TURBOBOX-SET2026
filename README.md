@@ -42,6 +42,8 @@ python3 tools/audit-turborama-rootfs.py /caminho/para/system-extraido --initramf
 
 Essa auditoria confere identidade, serviços habilitados, carregadores ELF, configurações e integração do atualizador. O argumento `--initramfs` é opcional. Use também `--disk /caminho/para/Generic.img.gz` para conferir os rótulos das partições de boot e dados, sem montar nem alterar a imagem.
 
+A varredura do conteúdo extraído inclui nomes de arquivos, links e textos dentro dos binários. Créditos de autoria e caminhos de compilação são contabilizados separadamente; não são removidos por substituição de bytes em executáveis. Se a imagem foi compilada em outro diretório, informe o caminho exato com `--build-root /caminho/original/do/codigo`. Essa exceção não permite caminhos antigos de configuração ou comandos de execução.
+
 ## Licença e atribuições
 
 O projeto é distribuído sob as licenças presentes no diretório `licenses`. Componentes de terceiros mantêm suas licenças e atribuições originais nos respectivos arquivos-fonte e repositórios derivados.

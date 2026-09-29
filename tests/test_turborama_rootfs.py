@@ -1,5 +1,6 @@
 import importlib.util
 import gzip
+import os
 from pathlib import Path
 import struct
 import tempfile
@@ -12,6 +13,31 @@ SPEC.loader.exec_module(AUDIT)
 
 
 class RootfsTests(unittest.TestCase):
+    def test_identity_distinguishes_build_paths_from_runtime_paths(self):
+        legacy = b'Emu' b'ELEC'
+        with tempfile.TemporaryDirectory(prefix='turborama-identity-test-') as tmp:
+            root = Path(tmp)
+            build_root = b'/build/' + legacy
+            (root / 'binary').write_bytes(b'\x7fELF\0' + build_root + b'/src/test.cpp\0')
+            (root / 'license').write_bytes(b'# Copyright Original ' + legacy + b' team\n')
+            errors, metadata, attributions = AUDIT.audit_identity(root, Path(os.fsdecode(build_root)))
+            self.assertEqual(errors, [])
+            self.assertEqual((metadata, attributions), (1, 1))
+            (root / 'binary').write_bytes(build_root + b'/src/test.cpp\0/' + legacy.lower() + b'/configs/test.cfg\0')
+            errors, _, _ = AUDIT.audit_identity(root, Path(os.fsdecode(build_root)))
+            self.assertEqual(len(errors), 1)
+            self.assertIn('Legacy payload content: /binary', errors[0])
+            (root / 'binary').write_bytes(build_root + b'-runtime/configs\0')
+            errors, _, _ = AUDIT.audit_identity(root, Path(os.fsdecode(build_root)))
+            self.assertEqual(len(errors), 1, 'A similarly named directory is not the actual build root')
+
+    def test_identity_checks_symlink_targets_without_following_them(self):
+        with tempfile.TemporaryDirectory(prefix='turborama-identity-test-') as tmp:
+            root = Path(tmp)
+            (root / 'link').symlink_to('/' + 'emu' + 'elec/configs')
+            errors, _, _ = AUDIT.audit_identity(root)
+            self.assertEqual(errors, ['Legacy symlink target: /link'])
+
     def test_absolute_and_relative_links_stay_in_image(self):
         with tempfile.TemporaryDirectory(prefix='turborama-rootfs-test-') as tmp:
             root = Path(tmp)

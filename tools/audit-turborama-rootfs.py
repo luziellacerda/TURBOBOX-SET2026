@@ -12,6 +12,48 @@ import struct
 import xml.etree.ElementTree as ET
 
 
+LEGACY = re.compile(rb'emu' rb'elec|\bee' rb'mount\b|\bee' rb'roms\b|\bee' rb'_utils\b', re.I)
+
+
+def audit_identity(root, build_root=None):
+    """Inspect payload bytes and links, separating build provenance from branding."""
+    errors = []
+    build_references = 0
+    attributions = 0
+    prefix = os.fsencode(build_root) if build_root else None
+    build_pattern = re.compile(re.escape(prefix) + rb'(?=/|[\x00\s]|$)') if prefix else None
+    for directory, dirs, files in os.walk(root, followlinks=False):
+        for name in dirs + files:
+            path = Path(directory) / name
+            relative = str(path.relative_to(root))
+            if LEGACY.search(os.fsencode(relative)):
+                errors.append(f'Legacy payload path: /{relative}')
+            if path.is_symlink():
+                if LEGACY.search(os.fsencode(os.readlink(path))):
+                    errors.append(f'Legacy symlink target: /{relative}')
+                continue
+            if not path.is_file():
+                continue
+            data = path.read_bytes()
+            if not LEGACY.search(data):
+                continue
+            if build_pattern:
+                data, count = build_pattern.subn(b'<build-root>', data)
+                build_references += count * len(LEGACY.findall(prefix))
+            for match in LEGACY.finditer(data):
+                start = max(data.rfind(b'\0', 0, match.start()), data.rfind(b'\n', 0, match.start())) + 1
+                ends = [end for end in (data.find(b'\0', match.end()), data.find(b'\n', match.end())) if end >= 0]
+                end = min(ends) if ends else len(data)
+                line = data[start:end]
+                if b'copyright' in line.lower():
+                    attributions += 1
+                    continue
+                excerpt = data[max(start, match.start() - 60):min(end, match.end() + 100)]
+                errors.append(f'Legacy payload content: /{relative}: {excerpt.decode("utf-8", errors="replace")!r}')
+                break  # One actionable diagnostic per file is sufficient.
+    return errors, build_references, attributions
+
+
 def audit_disk(path):
     """Read the labels of the Generic MBR image without mounting or modifying it."""
     errors = []
@@ -148,10 +190,15 @@ def main():
     parser.add_argument('root', type=Path, help='Extracted Amlogic-ng SYSTEM directory')
     parser.add_argument('--initramfs', type=Path, help='Optional extracted initramfs directory')
     parser.add_argument('--disk', type=Path, help='Optional Generic .img or .img.gz for partition label checks')
+    parser.add_argument('--build-root', type=Path, default=Path(__file__).resolve().parents[1],
+                        help='Exact source directory to classify embedded build paths as provenance')
     args = parser.parse_args()
     if not args.root.is_dir():
         parser.error('root must be an extracted directory')
     errors = audit(args.root.resolve(), args.initramfs.resolve() if args.initramfs else None)
+    identity_errors, build_references, attributions = audit_identity(args.root.resolve(), args.build_root)
+    errors.extend(identity_errors)
+    print(f'Payload identity: {build_references} build-path references and {attributions} attribution references preserved.')
     if args.disk:
         errors.extend(audit_disk(args.disk))
     for error in errors:

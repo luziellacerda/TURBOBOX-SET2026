@@ -1,7 +1,7 @@
 [Unit]
 Description=Create libMali overlay for specific AML device
 After=var.mount
-Before=kodi.service
+Before=kodi.service turborama-autostart.service emustation.service retroarch.service
 
 [Service]
 Type=oneshot

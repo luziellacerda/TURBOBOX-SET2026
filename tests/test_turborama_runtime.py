@@ -183,6 +183,11 @@ class JavaTests(unittest.TestCase):
 
 
 class BootTests(unittest.TestCase):
+    def test_graphics_overlay_is_ready_before_frontends(self):
+        unit = (ROOT / 'projects/Amlogic-ce/devices/Amlogic-ng/packages/opengl-meson/system.d/libmali.service').read_text()
+        before = re.search(r'^Before=(.*)$', unit, re.M)[1].split()
+        self.assertTrue({'turborama-autostart.service', 'emustation.service', 'retroarch.service'} <= set(before))
+
     def test_autostart_does_not_wait_for_dependent_frontend(self):
         unit = (RUNTIME / 'system.d/turborama-autostart.service').read_text()
         self.assertIn('Before=emustation.service', unit)

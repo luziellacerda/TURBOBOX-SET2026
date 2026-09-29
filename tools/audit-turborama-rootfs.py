@@ -166,6 +166,17 @@ def audit(root, initramfs=None):
                 f'Service is not enabled: {name}')
     require('Before=emustation.service' in read(units + '/turborama-autostart.service'), 'Missing frontend ordering')
     require('systemctl --no-block start emustation' in read('/usr/bin/turborama_autostart.sh'), 'Autostart can wait on its own dependency')
+    graphics = read(units + '/libmali.service')
+    ordering = re.search(r'^Before=(.*)$', graphics, re.M)
+    require(bool(ordering) and {'turborama-autostart.service', 'emustation.service', 'retroarch.service'} <= set(ordering[1].split()),
+            'Mali graphics setup is not ordered before Turborama frontends')
+    enabled = units + '/local-fs.target.wants/libmali.service'
+    require(image_path(root, enabled).is_file(), 'Mali graphics setup is not enabled')
+    read('/usr/sbin/libmali-overlay-setup')
+    for directory in ('/usr/lib', '/usr/lib32'):
+        for gpu in ('gondul', 'dvalin', 'm450'):
+            require(image_path(root, f'{directory}/libMali.{gpu}.so').is_file(),
+                    f'Missing graphics driver: {directory}/libMali.{gpu}.so')
 
     commands = ('turborama-settings', 'turborama_asd', 'emulationstation', 'retroarch', 'retroarch32',
                 'turboramaRunEmu.sh', 'turborama-utils', 'emustation-config', 'updatecheck.sh', 'python3')

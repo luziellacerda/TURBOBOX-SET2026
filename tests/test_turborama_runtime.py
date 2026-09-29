@@ -2,16 +2,20 @@
 """Host-side checks for renamed runtime contracts; never touch host boot/services."""
 
 import ast
+from contextlib import redirect_stdout
 import hashlib
 import io
 import os
 from pathlib import Path
 import re
+import runpy
 import struct
 import subprocess
 import tarfile
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT / 'packages/sx05re/turborama'
@@ -134,6 +138,39 @@ class JoystickTests(unittest.TestCase):
         self.assertEqual(namespace['get_hex_chars']('0x0a'), b'\n')
         self.assertTrue(namespace['process_event'](struct.pack('IhBB', 0, 1, 1, 0)))
         self.assertEqual(calls, [b'\x1b', b'[', b'A'])
+
+
+class PythonRuntimeTests(unittest.TestCase):
+    def test_runtime_scripts_parse_with_python3(self):
+        checked = 0
+        for base in ('packages/sx05re', 'packages/lib32/turborama', 'projects/Amlogic-ce/devices/Amlogic-ng'):
+            for path in (ROOT / base).rglob('*'):
+                if path.is_symlink() or not path.is_file():
+                    continue
+                data = path.read_bytes()
+                first = data.split(b'\n', 1)[0]
+                if path.suffix == '.py' or (first.startswith(b'#!') and b'python' in first):
+                    with self.subTest(path=str(path.relative_to(ROOT))):
+                        ast.parse(data, filename=str(path))
+                    checked += 1
+        self.assertGreaterEqual(checked, 16)
+
+    def test_bluetooth_listing_keeps_devices_from_multiple_adapters(self):
+        objects = {}
+        for number in (0, 1):
+            adapter = f'/org/bluez/hci{number}'
+            objects[adapter] = {'org.bluez.Adapter1': {'Name': f'Adapter {number}'}}
+            objects[adapter + '/dev_controller'] = {
+                'org.bluez.Device1': {'Name': f'Controller {number}', 'Vendor': 0x1234, 'Adapter': adapter}}
+        manager = SimpleNamespace(GetManagedObjects=lambda: objects)
+        bus = SimpleNamespace(get_object=lambda name, path: manager)
+        dbus = SimpleNamespace(SystemBus=lambda: bus, Interface=lambda obj, name: obj)
+        output = io.StringIO()
+        with patch.dict('sys.modules', {'dbus': dbus}), redirect_stdout(output):
+            runpy.run_path(str(RUNTIME / 'bin/batocera/batocera-bt-list-devices'))
+        for number in (0, 1):
+            self.assertIn(f'Controller {number}', output.getvalue())
+        self.assertEqual(output.getvalue().count('Vendor = 0x1234'), 2)
 
 
 class JavaTests(unittest.TestCase):

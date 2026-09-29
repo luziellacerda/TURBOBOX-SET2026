@@ -2,7 +2,7 @@
 # Copyright (C) 2019-present Shanti Gilbert (https://github.com/shantigilbert)
 
 PKG_NAME="turborama-emulationstation"
-PKG_VERSION="fc0f495c65bb8fb9c6eb0f53d4563e8afee4bf65"
+PKG_VERSION="2195f3b9d50db99c88a47e2b0ccf5a31ddef7e36"
 PKG_GIT_CLONE_BRANCH="Turborama"
 PKG_REV="1"
 PKG_ARCH="any"

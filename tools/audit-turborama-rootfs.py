@@ -156,6 +156,8 @@ def audit(root, initramfs=None):
     require(link.is_symlink() and os.readlink(link) == '/storage/.config/turborama', 'Wrong /turborama link')
 
     units = '/usr/lib/systemd/system'
+    for template in (root / units.lstrip('/')).glob('*.wants/*@.service'):
+        errors.append(f'Empty service template enabled without an instance: {template.relative_to(root)}')
     require(image_path(root, units + '/default.target') == root / (units + '/turborama.target').lstrip('/'),
             'Default target does not select Turborama')
     read(units + '/turborama.target')

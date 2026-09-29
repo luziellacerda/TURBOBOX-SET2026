@@ -183,6 +183,12 @@ class JavaTests(unittest.TestCase):
 
 
 class BootTests(unittest.TestCase):
+    def test_sixaxis_instances_are_started_by_udev(self):
+        base = ROOT / 'packages/sx05re/tools/sysutils/sixaxis'
+        self.assertNotIn('enable_service sixaxis@.service', (base / 'package.mk').read_text())
+        self.assertIn('SYSTEMD_WANTS', (base / 'udev.d/99-sixaxis.rules').read_text())
+        self.assertIn('sixaxis-helper.sh %I', (base / 'system.d/sixaxis@.service').read_text())
+
     def test_graphics_overlay_is_ready_before_frontends(self):
         unit = (ROOT / 'projects/Amlogic-ce/devices/Amlogic-ng/packages/opengl-meson/system.d/libmali.service').read_text()
         before = re.search(r'^Before=(.*)$', unit, re.M)[1].split()

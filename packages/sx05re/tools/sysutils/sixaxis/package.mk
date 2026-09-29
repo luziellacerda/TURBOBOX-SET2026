@@ -22,7 +22,5 @@ makeinstall_target() {
     cp bins/sixaxis-timeout ${INSTALL}/usr/bin/sixaxis-timeout
 }
 
-post_install() {
-enable_service sixaxis@.service
-}
-
+# udev starts one service instance for each controller; the empty template
+# must not be enabled as a boot-time service without a device argument.

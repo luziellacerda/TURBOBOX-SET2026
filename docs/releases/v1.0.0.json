@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "product": "Turborama",
+  "codename": "Genesis",
+  "release_tag": "v1.0.0",
+  "channel": "stable",
+  "recorded_on": "2026-09-30",
+  "repository": "https://github.com/luziellacerda/TURBOBOX-SET2026",
+  "runtime_source_commit": "10bba5ef28aed80d67792015b0a05c4439962efe",
+  "tag_includes_later_documentation_only": true,
+  "image_version": "1.0-Genesis_devel_20260930083340",
+  "project": "Amlogic-ce",
+  "device": "Amlogic-ng",
+  "architecture": "aarch64",
+  "distro": "Turborama",
+  "image_rebuilt_for_stable_promotion": false,
+  "automatic_update_catalog_enabled": false,
+  "artifacts": [
+    {
+      "filename": "Turborama-Amlogic-ng.aarch64-1.0-Genesis_devel_20260930083340-Generic.img.gz",
+      "size_bytes": 1318103973,
+      "sha256": "5b61d521773bdcdf17241f9bfc7d07e42da01b87ddf85bc24b4f933a63141216",
+      "published_as_release_asset": true,
+      "purpose": "Fresh Generic SD installation with device-compatible DTB"
+    },
+    {
+      "filename": "Turborama-Amlogic-ng.aarch64-1.0-Genesis_devel_20260930083340.tar",
+      "size_bytes": 1455370240,
+      "sha256": "feaaccc6852bf35aa6464289f48bde4ba24ca51be8f24fc50f69e11fd2f4f2dd",
+      "published_as_release_asset": false,
+      "purpose": "Local maintenance package; migration not validated"
+    },
+    {
+      "filename": "Turborama-Amlogic-ng.aarch64-1.0-Genesis_devel_20260930083340.system",
+      "size_bytes": 1417834496,
+      "sha256": "5b40b2dc4adf601ba770a057a1d4f3fb886254bc43e074f019a001aafc2daa9d",
+      "published_as_release_asset": false,
+      "purpose": "SquashFS SYSTEM contained in the published disk image"
+    },
+    {
+      "filename": "Turborama-Amlogic-ng.aarch64-1.0-Genesis_devel_20260930083340.kernel",
+      "size_bytes": 22435840,
+      "sha256": "12b7c087ff98931889781a8706b815c4e261a2e57ec00c25cd4074860534272b",
+      "published_as_release_asset": false,
+      "purpose": "Kernel and ramdisk contained in the published disk image"
+    }
+  ],
+  "user_supplied_dtb": {
+    "filename": "dtb.img",
+    "internal_id": "sc2_s905x4_2g",
+    "size_bytes": 86439,
+    "sha256": "38e8323c401e4f0bbd22ae2f464349bd770408ef117b02ab5cb3f5bbd1878cfb",
+    "identical_to_bundled_dtb": true,
+    "bundled_path": "usr/share/bootloader/device_trees/sc2_s905x4_2g.dtb",
+    "hardware_model_confirmed": false,
+    "hardware_ram_confirmed": false,
+    "published_as_separate_release_asset": false
+  },
+  "validation": {
+    "main_unit_tests_passed": 23,
+    "frontend_unit_tests_passed": 4,
+    "frontend_commit": "841d21909db2c8a1fe015bb838fd77695d77e730",
+    "rootfs_identity_initramfs_disk_audit_failures": 0,
+    "preserved_build_path_references": 7946,
+    "preserved_attribution_references": 4,
+    "generic_image_checksum_verified": true,
+    "local_tar_checksum_verified": true,
+    "packed_system_and_kernel_match_audited_artifacts": true,
+    "hardware_test_source": "Owner reported working tests on 2026-09-30",
+    "exact_tested_image_hash_confirmed": false,
+    "hardware_test_checklist_received": false,
+    "emmc_installation_validated": false,
+    "migration_validated": false,
+    "bit_reproducible_build_certified": false
+  },
+  "documentation": {
+    "tutorial": "docs/TUTORIAL-TURBORAMA.md",
+    "handoff": "docs/HANDOFF-TURBORAMA.md",
+    "release_notes": "docs/releases/v1.0.0.md"
+  }
+}

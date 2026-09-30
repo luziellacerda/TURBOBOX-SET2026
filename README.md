@@ -4,6 +4,7 @@ Turborama é um sistema operacional de jogos retro para dispositivos Amlogic, co
 
 ## Versão
 
+- Canal: estável, tag `v1.0.0`, publicada em 30/09/2026
 - Produto: Turborama
 - Versão: 1.0
 - Codinome: Genesis
@@ -11,14 +12,27 @@ Turborama é um sistema operacional de jogos retro para dispositivos Amlogic, co
 - Projeto: Amlogic-ce
 - Dispositivo: Amlogic-ng
 
+O responsável informou funcionamento em testes no aparelho em 30/09/2026. Esse relato não equivale a homologação de todos os modelos, periféricos ou instalação em eMMC. A imagem preserva sua identificação original `1.0-Genesis_devel_20260930083340`; não foi recompilada apenas para mudar o nome. O código de execução está baseado no commit `10bba5ef28aed80d67792015b0a05c4439962efe`.
+
+## Downloads e documentação
+
+- [Versão estável e imagem Generic](https://github.com/luziellacerda/TURBOBOX-SET2026/releases/tag/v1.0.0)
+- [Tutorial completo de compilação e instalação](docs/TUTORIAL-TURBORAMA.md)
+- [Handoff para manutenção e recuperação futura](docs/HANDOFF-TURBORAMA.md)
+- [Notas e limites da versão estável](docs/releases/v1.0.0.md)
+- [Manifesto com versões e checksums](docs/releases/v1.0.0.json)
+
 ## Compilação
 
 ```bash
 git clone https://github.com/luziellacerda/TURBOBOX-SET2026.git
 cd TURBOBOX-SET2026
-git checkout turborama-1.0
-PROJECT=Amlogic-ce DEVICE=Amlogic-ng ARCH=aarch64 DISTRO=Turborama make image
+git checkout --detach v1.0.0
+PROJECT=Amlogic-ce DEVICE=Amlogic-ng ARCH=aarch64 DISTRO=Turborama \
+  THREADCOUNT=3 CONCURRENCY_MAKE_LEVEL=4 CONCURRENCY_LOAD=16 make image
 ```
+
+Compile como usuário normal. A tag fixa a base estável; `turborama-1.0` é uma branch que pode avançar. Dependências, logs, verificação da imagem, DTB e recuperação estão no tutorial. Uma nova compilação terá outro timestamp e não promete o mesmo checksum do binário arquivado.
 
 ## Identidade do sistema
 
